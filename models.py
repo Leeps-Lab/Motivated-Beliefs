@@ -11,7 +11,7 @@ import numpy as np
 import math
 
 class Constants(BaseConstants):
-    name_in_url = 'single_asset_market_overconfidence'
+    name_in_url = 'Motivated_Beliefs'
     players_per_group = None
     num_rounds = 17
     # the columns of the config CSV and their types

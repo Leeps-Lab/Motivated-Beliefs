@@ -19,8 +19,8 @@ class Pre_Trading_Survey(Page):
             def before_next_page(self):
                 self.player.save()
     
-            img_sig_url = '/static/single_asset_market_overconfidence/signal_{}.jpg'.format(self.player.signal_nature)
-            img_url = '/static/single_asset_market_overconfidence/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+            img_sig_url = '/static/Motivated_Beliefs/signal_{}.jpg'.format(self.player.signal_nature)
+            img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
 
             return {
                 'signal1black': self.player.signal1_black,
@@ -39,8 +39,8 @@ class Market(BaseMarketPage):
     
     def vars_for_template(self):
         
-        img_sig_url = '/static/single_asset_market_overconfidence/signal_{}.jpg'.format(self.player.signal_nature)
-        img_url = '/static/single_asset_market_overconfidence/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+        img_sig_url = '/static/Motivated_Beliefs/signal_{}.jpg'.format(self.player.signal_nature)
+        img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
 
         r_num = self.subsession.round_number 
         output = "Period Number"
@@ -74,8 +74,8 @@ class Post_Trading_Survey(BaseMarketPage):
             def before_next_page(self):
                 self.player.save()
 
-            img_sig_url = '/static/single_asset_market_overconfidence/signal_{}.jpg'.format(self.player.signal_nature)
-            img_url = '/static/single_asset_market_overconfidence/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+            img_sig_url = '/static/Motivated_Beliefs/signal_{}.jpg'.format(self.player.signal_nature)
+            img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
 
             return {
                 'signal1black': self.player.signal1_black,
