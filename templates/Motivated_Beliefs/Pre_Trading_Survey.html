@@ -19,21 +19,52 @@
 .forms {
     flex: 65%;
 }
+/* The alert message box */
+.modal-body {
+  padding: 2px 16px;
+  background-color: #d40404;
+  text-align: center;
+  color: white;
+}
 </style>
 {% endblock %} 
+{% block scripts %}
+<div id="myModal" class="modal">
+     <div class="modal-content">
+            <div class="modal-body">
+              <p></b>Please Answer All The Questions</b></p>
+              <p>Then continue to the next page</p>
+            </div>
+      </div>
+</div>
+<script type="text/javascript">
+    var modal = document.getElementById("myModal");
+        setTimeout(
+            function () {
+                modal.style.display = "block";
+            },
+            15*1000 // 15 seconds
+        );
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+</script>
+{% endblock %}
 {% block content %}
 <body>
 <div class = "survey-container">
 
 <div class="forms"> 
-	<div> 
-    	<br>
-        	<b> Question 1: </b> What do you think is the probability (out of 100) that the true state is 'G'?
+    <div> 
+        <br>
+            <b> Question 1: </b> What do you think is the probability (out of 100) that the true state is 'G'?
         </br>
         {% formfield player.Question_1_pre %}
     </div>
     <div> 
-		<br>
+        <br>
                 <b> Question 2: </b> What is the lowest price (between 100 and 300) at which you are willing to sell your asset.
             </br>
             <br>

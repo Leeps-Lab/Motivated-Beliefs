@@ -6,34 +6,60 @@
 {% endblock %}
 
 {% block scripts %}
-        <script type="module" src="/static/motivated_beliefs/trade_view.js"></script>
+<div id="myModal" class="modal">
+     <div class="modal-content">
+            <div class="modal-body">
+              <p></b>Please Answer All The Questions</b></p>
+              <p>Then continue to the next page</p>
+            </div>
+      </div>
+</div>
+    <script type="module" src="/static/single_asset_market_overconfidence/trade_view.js"></script>
+    <script type="text/javascript">
+       var modal = document.getElementById("myModal");
+        setTimeout(
+            function () {
+                modal.style.display = "block";
+            },
+            15*1000 // 15 seconds
+        );
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        </script>
 {% endblock %}
-
 {% block styles %}
 <style>
 .survey-container{
     display: flex;
 }
 .signal {
-	flex: 35%;
+    flex: 35%;
 }
 .signal img {
     max-width: 100%;
     height: auto;
 }
 .forms {
- 	flex: 65%;
+    flex: 65%;
 }
 .trade-container {
     text-align: center;
     justify-content: center;
 }
+.modal-body {
+  padding: 2px 16px;
+  background-color: #d40404;
+  text-align: center;
+  color: white;
 </style>
 {% endblock %} 
 {% block content %}
 <div class = "survey-container">
     <div class="forms"> 
-    	<div> 
+        <div> 
         <br>
             <b> Question 1: </b> What do you think is the probability (out of 100) that the true state is 'G'?
         </br>
@@ -76,5 +102,3 @@
      </div>
 </div>
 {% endblock %}
-
-

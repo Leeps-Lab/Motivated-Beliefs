@@ -13,7 +13,7 @@ import math
 class Constants(BaseConstants):
     name_in_url = 'Motivated_Beliefs'
     players_per_group = None
-    num_rounds = 17
+    num_rounds = 16
     # the columns of the config CSV and their types
     # this dict is used by ConfigManager
     config_fields = {
@@ -424,17 +424,17 @@ class Player(markets_models.Player):
         R = self.Question_3_post
         self.Question_3_payoff_post= (int) (100 - (math.pow((C - R),2)))
         ### set to zero if did not answer survye questions
-        if self.Question_1_pre==0:
+        if self.Question_1_pre==-1:
             self.Question_1_payoff_pre = 0
-        if self.Question_1_post==0:
+        if self.Question_1_post==-1:
             self.Question_1_payoff_post = 0
-        if self.Question_2_pre==0:
+        if self.Question_2_pre==-1:
             self.Question_2_payoff_pre = 0
-        if self.Question_2_post==0:
+        if self.Question_2_post==-1:
             self.Question_2_payoff_post = 0
-        if self.Question_3_pre==0:
+        if self.Question_3_pre==-1:
             self.Question_3_payoff_pre = 0
-        if self.Question_3_post==0:
+        if self.Question_3_post==-1:
             self.Question_3_payoff_post = 0
         ## set total payoff ###############################
         self.payoff_from_trading = self.profit
