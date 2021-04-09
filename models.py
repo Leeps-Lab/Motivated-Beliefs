@@ -118,11 +118,17 @@ class Subsession(markets_models.Subsession):
         for p in self.get_players():
             p.pair = player_pairs[i]
             i=i+1
-            ####
-            ## assing colors###
-            ##
             if treat == 1:  
-                print("XXX")
+                if state == 1:
+                    if p.ranking > p.pair:
+                        p.hi = 1
+                    else:
+                        p.hi = 0
+                else:
+                    if p.ranking > p.pair:
+                        p.hi = 0
+                    else:
+                        p.hi = 1
             else:
                 print("XXX")
     #######################################################################
@@ -366,7 +372,7 @@ class Player(markets_models.Player):
     payoff_from_trading = models.IntegerField()
     shares = models.IntegerField()
     average_payoff = models.IntegerField()
-    hi_low = models.IntegerField()
+    hi = models.IntegerField()
     color = models.IntegerField()
     pair = models.IntegerField()
 ## Questions Pre

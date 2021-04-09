@@ -30,12 +30,19 @@ class Pre_Trading_Survey(Page):
     
             img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
             img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+            if self.player.hi==1:
+                color = "Green"
+            elif self.player.hi==0:
+                color = "Red"
+            else:
+                color = None
 
             return {
                 'signal1black': self.player.signal1_black,
                 'signal1white': self.player.signal1_white,
                 'img_url': img_url,
                 'img_sig_url': img_sig_url,
+                'color':color
             }
 
     form_model = 'player'
@@ -57,7 +64,12 @@ class Market(BaseMarketPage):
             r_num = r_num -2
         else:
             output = "Practice Period"
-
+        if self.player.hi==1:
+             color = "Green"
+        elif self.player.hi==0:
+            color = "Red"
+        else:
+            color = None
 
         return {
             'round_num_display_string': output, 
@@ -65,6 +77,7 @@ class Market(BaseMarketPage):
             'signal1black': self.player.signal1_black,
             'signal1white': self.player.signal1_white,
             'img_url': img_url,
+            'color': color,
             'img_sig_url': img_sig_url,
         }
 class Post_Trading_Survey(BaseMarketPage):
@@ -88,11 +101,18 @@ class Post_Trading_Survey(BaseMarketPage):
 
             img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
             img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+            if self.player.hi==1:
+                color = "Green"
+            elif self.player.hi==0:
+                color = "Red"
+            else:
+                color = None
 
             return {
                 'signal1black': self.player.signal1_black,
                 'signal1white': self.player.signal1_white,
                 'img_url': img_url,
+                'color': color,
                 'img_sig_url': img_sig_url,
             }
 
