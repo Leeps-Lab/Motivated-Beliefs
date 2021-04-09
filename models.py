@@ -46,7 +46,15 @@ class Constants(BaseConstants):
         'player_5_con': int, 
         'player_6_con': int, 
         'player_7_con': int, 
-        'player_8_con': int
+        'player_8_con': int,
+        'player_1_hi': int, 
+        'player_2_hi': int, 
+        'player_3_hi': int, 
+        'player_4_hi': int, 
+        'player_5_hi': int, 
+        'player_6_hi': int, 
+        'player_7_hi': int, 
+        'player_8_hi': int
     }
 
 
@@ -113,11 +121,11 @@ class Subsession(markets_models.Subsession):
     ### treat, player
     #######################################################################
     def make_pairs(self,treat,state):
-        player_pairs = self.get_pairs_array(treat)
+        player_pairs = self.get_pairs_array()
+        random_colors = self.get_random_pp()
         i=0
         for p in self.get_players():
             p.pair = player_pairs[i]
-            i=i+1
             if treat == 1:  
                 if state == 1:
                     if p.ranking > p.pair:
@@ -130,12 +138,18 @@ class Subsession(markets_models.Subsession):
                     else:
                         p.hi = 1
             else:
-                print("XXX")
+                p.hi = random_colors[i]
+            i=i+1
+    ######################################################################
+    ######################################################################
+    def get_random_pp(self):
+        return [self.config.player_1_hi,self.config.player_2_hi, self.config.player_3_hi, self.config.player_4_hi, 
+                self.config.player_5_hi, self.config.player_6_hi,self.config.player_7_hi, self.config.player_8_hi]
     #######################################################################
     ### get group array
     ### 
     #######################################################################
-    def get_pairs_array(self, treat):
+    def get_pairs_array(self):
         return [self.config.player_1_pair,self.config.player_2_pair, self.config.player_3_pair, self.config.player_4_pair, 
                 self.config.player_5_pair, self.config.player_6_pair,self.config.player_7_pair, self.config.player_8_pair]
     #######################################################################

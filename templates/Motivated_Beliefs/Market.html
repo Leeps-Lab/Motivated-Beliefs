@@ -61,9 +61,13 @@
 				the L-group if your IQ score is lower than your paird plarer
 			</p>
 			<img src="{{img_sig_url}}"/>
-			<p>
-				<b>Your color in this period is {{color}}<b>
-			</p>
+			 <p>
+            {%if hi%}
+                <b>Your color in this period is <b style="color:#34e610">{{color}}</b><b>
+            {%else%}
+                <b>Your color in this period is <b style="color:#ff0000">{{color}}</b><b>
+            {%endif%}
+        </p>
 			<p>
 				Your private signal is <br>
 				{{ signal1black }} black ball{{ signal1black|pluralize }} and {{ signal1white }} white ball{{ signal1white|pluralize }}

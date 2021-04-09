@@ -93,7 +93,11 @@
             </p>
     <img src="{{img_sig_url}}"/>
         <p>
-            <b>Your color in this period is {{color}}<b>
+            {%if hi%}
+                <b>Your color in this period is <b style="color:#34e610">{{color}}</b><b>
+            {%else%}
+                <b>Your color in this period is <b style="color:#ff0000">{{color}}</b><b>
+            {%endif%}
         </p>
         <b>
                 <br>Your private signal</br>

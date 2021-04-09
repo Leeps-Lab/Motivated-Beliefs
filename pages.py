@@ -32,8 +32,10 @@ class Pre_Trading_Survey(Page):
             img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
             if self.player.hi==1:
                 color = "Green"
+                hi = True
             elif self.player.hi==0:
                 color = "Red"
+                hi = False
             else:
                 color = None
 
@@ -42,7 +44,8 @@ class Pre_Trading_Survey(Page):
                 'signal1white': self.player.signal1_white,
                 'img_url': img_url,
                 'img_sig_url': img_sig_url,
-                'color':color
+                'color':color,
+                'hi': hi
             }
 
     form_model = 'player'
@@ -66,8 +69,10 @@ class Market(BaseMarketPage):
             output = "Practice Period"
         if self.player.hi==1:
              color = "Green"
+             hi = True
         elif self.player.hi==0:
             color = "Red"
+            hi =False
         else:
             color = None
 
@@ -79,6 +84,7 @@ class Market(BaseMarketPage):
             'img_url': img_url,
             'color': color,
             'img_sig_url': img_sig_url,
+            'hi':hi
         }
 class Post_Trading_Survey(BaseMarketPage):
     def get_timeout_seconds(self):
@@ -103,8 +109,10 @@ class Post_Trading_Survey(BaseMarketPage):
             img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
             if self.player.hi==1:
                 color = "Green"
+                hi =True
             elif self.player.hi==0:
                 color = "Red"
+                hi =False
             else:
                 color = None
 
@@ -114,6 +122,7 @@ class Post_Trading_Survey(BaseMarketPage):
                 'img_url': img_url,
                 'color': color,
                 'img_sig_url': img_sig_url,
+                'hi':hi
             }
 
     form_model = 'player'
