@@ -1,6 +1,12 @@
 from otree_markets.pages import BaseMarketPage
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from ._builtin import Page, WaitPage
+
+class grouping(WaitPage):
+
+    wait_for_all_groups = True
+    after_all_players_arrive = 'grouping'
+
 class Wait_for_trading(WaitPage):
     wait_for_all_groups = True
 
@@ -22,7 +28,7 @@ class Pre_Trading_Survey(Page):
                 self.player.Question_3_pre = -1
                 self.player.save()
     
-            img_sig_url = '/static/Motivated_Beliefs/signal_{}.jpg'.format(self.player.signal_nature)
+            img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
             img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
 
             return {
@@ -42,7 +48,7 @@ class Market(BaseMarketPage):
     
     def vars_for_template(self):
         
-        img_sig_url = '/static/Motivated_Beliefs/signal_{}.jpg'.format(self.player.signal_nature)
+        img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
         img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
 
         r_num = self.subsession.round_number 
@@ -80,7 +86,7 @@ class Post_Trading_Survey(BaseMarketPage):
                 self.player.Question_3_post = -1
                 self.player.save()
 
-            img_sig_url = '/static/Motivated_Beliefs/signal_{}.jpg'.format(self.player.signal_nature)
+            img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
             img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
 
             return {
@@ -176,4 +182,4 @@ class Results_sum(Page):
         }
 
 
-page_sequence = [Wait_for_trading, Pre_Trading_Survey, Wait_for_trading, Market, Post_Trading_Survey, Wait, Results_state, Results_trading, Results_survey, Results_total, Results_sum]
+page_sequence = [grouping, Wait_for_trading, Pre_Trading_Survey, Wait_for_trading, Market, Post_Trading_Survey, Wait, Results_state, Results_trading, Results_survey, Results_total, Results_sum]

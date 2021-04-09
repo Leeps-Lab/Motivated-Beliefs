@@ -51,17 +51,24 @@
 			</single-asset-text-interface>
 		</div>
 		<div class="signal">
-			<img src="{{img_sig_url}}"/>
 			<p>
-				The computer drew two balls from the bag that corresponds to the true state of the world. The two balls are:
+				The Computer Assinged you into
 			</p>
 			<p>
+				the H-group if your IQ score is higher than your paird plarer
+			</p>
+			<p>
+				the L-group if your IQ score is lower than your paird plarer
+			</p>
+			<img src="{{img_sig_url}}"/>
+			<p>
+				<b>Your color in this period is ..<b>
+			</p>
+			<p>
+				Your private signal is <br>
 				{{ signal1black }} black ball{{ signal1black|pluralize }} and {{ signal1white }} white ball{{ signal1white|pluralize }}
 			</p>
 			<img src="{{img_url}}"/> 
-			<p>
-				<b> All traders trade under the same state with the same signal type. </b>
-			</p>
 		</div>
 	</div>
 {% endblock %}

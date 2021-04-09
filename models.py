@@ -22,25 +22,31 @@ class Constants(BaseConstants):
         'cash_endowment': int,
         'allow_short': bool,
         'state': int,
-        'sig_a': int,
-        'sig_b_c': int,
-        'env': int, 
-        'player_1_a': int, 
-        'player_2_a': int, 
-        'player_3_a': int, 
-        'player_4_a': int, 
-        'player_5_a': int, 
-        'player_6_a': int, 
-        'player_7_a': int, 
-        'player_8_a': int, 
-        'player_1_b_c': int, 
-        'player_2_b_c': int, 
-        'player_3_b_c': int, 
-        'player_4_b_c': int, 
-        'player_5_b_c': int, 
-        'player_6_b_c': int, 
-        'player_7_b_c': int, 
-        'player_8_b_c': int
+        'player_1_pair': int, 
+        'player_2_pair': int, 
+        'player_3_pair': int, 
+        'player_4_pair': int, 
+        'player_5_pair': int, 
+        'player_6_pair': int, 
+        'player_7_pair': int, 
+        'player_8_pair': int,
+        'treat': int, 
+        'player_1_treat': int, 
+        'player_2_treat': int, 
+        'player_3_treat': int, 
+        'player_4_treat': int, 
+        'player_5_treat': int, 
+        'player_6_treat': int, 
+        'player_7_treat': int, 
+        'player_8_treat': int, 
+        'player_1_con': int, 
+        'player_2_con': int, 
+        'player_3_con': int, 
+        'player_4_con': int, 
+        'player_5_con': int, 
+        'player_6_con': int, 
+        'player_7_con': int, 
+        'player_8_con': int
     }
 
 
@@ -53,15 +59,19 @@ class Subsession(markets_models.Subsession):
     def allow_short(self):
         return self.config.allow_short
     def creating_session(self):
-
-        self.set_signal(self.config.env)
-        self.set_balls_signal(self.config.env)
-
         for player in self.get_players():
-            ## set the world state for each player equal to the global state
+        ## set the world state for each player equal to the global state
             player.world_state = self.config.state
 
-        ### get totals 
+        if self.round_number > self.config.num_rounds:
+            return
+        return super().creating_session()
+
+    def grouping(self):
+        self.set_player_id()
+        self.set_balls_signal(self.config.treat)
+        self.make_pairs(self.config.treat, self.config.state)
+         ### get totals 
         total_black = self.get_black_balls()
         total_white = self.get_white_balls()
         total_black_low = self.get_black_balls_low()
@@ -72,40 +82,67 @@ class Subsession(markets_models.Subsession):
             player.total_black_low = total_black_low
             player.total_black_high = total_black_high
 
-        if self.round_number > self.config.num_rounds:
-            return
-        return super().creating_session()
+    ######################################################################
+    ## sets player id based on IQ Ranking
+    ##
+    ######################################################################
+    def set_player_id(self):
+        rank = []
+        for player in self.get_players():
+            #print(player.participant.vars['ranking'])
+            rank.append((player, player.participant.vars['ranking']))
+            player.ranking = player.participant.vars['ranking']
+            print(player.ranking)
+            ### sort by rankinng
+            ## set playing id in group useing tupple..
+        #print(rank)
     #######################################################################
     ### sets the players signals 
-    ### env, player
+    ### treat, player
     #######################################################################
-    def set_signal(self, env):
-        if env == 0:
-            sig = self.config.sig_a
-            for p in self.get_players():
-                p.signal_nature = sig
-        else:
-            sig = self.config.sig_b_c
-            for p in self.get_players():
-                p.signal_nature = sig
-    def set_balls_signal(self,env):
-            player_bb = self.get_bb_array(env)
+    def set_balls_signal(self,treat):
+            player_bb = self.get_bb_array(treat)
             i=0
             for p in self.get_players():
+                print(p.ranking)
+                i=p.ranking-1
                 p.signal1_black = player_bb[i]
-                p.signal1_white = 2-p.signal1_black
-                i=i+1
+                p.signal1_white = 1-p.signal1_black
+    #######################################################################
+    ### sets the pairs for player and color
+    ### treat, player
+    #######################################################################
+    def make_pairs(self,treat,state):
+        player_pairs = self.get_pairs_array(treat)
+        i=0
+        for p in self.get_players():
+            p.pair = player_pairs[i]
+            i=i+1
+            ####
+            ## assing colors###
+            ##
+            if treat == 1:  
+                print("XXX")
+            else:
+                print("XXX")
+    #######################################################################
+    ### get group array
+    ### 
+    #######################################################################
+    def get_pairs_array(self, treat):
+        return [self.config.player_1_pair,self.config.player_2_pair, self.config.player_3_pair, self.config.player_4_pair, 
+                self.config.player_5_pair, self.config.player_6_pair,self.config.player_7_pair, self.config.player_8_pair]
     #######################################################################
     ### creates an array of player private signals  
     ### 
     #######################################################################
-    def get_bb_array(self, env):
-        if env==0:
-            return [self.config.player_1_a,self.config.player_2_a, self.config.player_3_a, self.config.player_4_a, 
-                    self.config.player_5_a, self.config.player_6_a,self.config.player_7_a, self.config.player_8_a]
+    def get_bb_array(self, treat):
+        if treat==1:
+            return [self.config.player_1_treat,self.config.player_2_treat, self.config.player_3_treat, self.config.player_4_treat, 
+                    self.config.player_5_treat, self.config.player_6_treat,self.config.player_7_treat, self.config.player_8_treat]
         else:
-            return [self.config.player_1_b_c,self.config.player_2_b_c, self.config.player_3_b_c, self.config.player_4_b_c, 
-                    self.config.player_5_b_c, self.config.player_6_b_c,self.config.player_7_b_c, self.config.player_8_b_c]
+            return [self.config.player_1_con,self.config.player_2_con, self.config.player_3_con, self.config.player_4_con, 
+                    self.config.player_5_con, self.config.player_6_con,self.config.player_7_con, self.config.player_8_con]
 
     #######################################################################
     ### sets all profits players 
@@ -329,6 +366,9 @@ class Player(markets_models.Player):
     payoff_from_trading = models.IntegerField()
     shares = models.IntegerField()
     average_payoff = models.IntegerField()
+    hi_low = models.IntegerField()
+    color = models.IntegerField()
+    pair = models.IntegerField()
 ## Questions Pre
     Question_1_pre = models.IntegerField(min=0, max=100,
         label='''
