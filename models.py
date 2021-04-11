@@ -98,9 +98,8 @@ class Subsession(markets_models.Subsession):
         rank = []
         for player in self.get_players():
             #print(player.participant.vars['ranking'])
-            rank.append((player, player.participant.vars['ranking']))
-            player.ranking = player.participant.vars['ranking']
-            print(player.ranking)
+            #rank.append((player, player.participant.vars['ranking']))
+            player.iqranking = player.participant.vars['ranking']
             ### sort by rankinng
             ## set playing id in group useing tupple..
         #print(rank)
@@ -112,8 +111,8 @@ class Subsession(markets_models.Subsession):
             player_bb = self.get_bb_array(treat)
             i=0
             for p in self.get_players():
-                print(p.ranking)
-                i=p.ranking-1
+                print(p.iqranking)
+                i=p.iqranking-1
                 p.signal1_black = player_bb[i]
                 p.signal1_white = 1-p.signal1_black
     #######################################################################
@@ -128,12 +127,12 @@ class Subsession(markets_models.Subsession):
             p.pair = player_pairs[i]
             if treat == 1:  
                 if state == 1:
-                    if p.ranking > p.pair:
+                    if p.iqranking > p.pair:
                         p.hi = 1
                     else:
                         p.hi = 0
                 else:
-                    if p.ranking > p.pair:
+                    if p.iqranking > p.pair:
                         p.hi = 0
                     else:
                         p.hi = 1
@@ -172,7 +171,7 @@ class Subsession(markets_models.Subsession):
          for player in self.get_players():
             player.set_profit()
     #######################################################################
-    ### sets the payoff for each player and assigns a ranking
+    ### sets the payoff for each player and assigns a profit ranking
     ### player
     #######################################################################
     def set_payoffs(self):
@@ -187,9 +186,9 @@ class Subsession(markets_models.Subsession):
 
         for i in range(len(rank)):
             if i>0 and rank[i].profit == rank[i-1].profit:
-                rank[i].ranking = rank[i-1].ranking
+                rank[i].pranking = rank[i-1].pranking
             else:
-                rank[i].ranking = n
+                rank[i].pranking = n
             n=n+1
 
         for p in self.get_players():
@@ -362,7 +361,8 @@ class Player(markets_models.Player):
     def BU_env_b(self, l, h ):
         return (((math.pow(0.6,l) * math.pow(.4,8-l))*(math.pow(.8,h)*math.pow(.2,8-h)))/(((math.pow(.6,l)*math.pow(.4,8-l)*math.pow(.8,h)*math.pow(.2,8-h)) +(math.pow(.4,l)*math.pow(.6,8-l)*math.pow(.2,h)*math.pow(.8,8-h)))))
 ## defined Variables 
-    ranking = models.IntegerField()
+    pranking = models.IntegerField()
+    iqranking = models.IntegerField()
     profit = models.IntegerField()
     total_payoff = models.IntegerField()
     payment_signal1 = models.IntegerField()
@@ -500,7 +500,7 @@ class Player(markets_models.Player):
         else:
             self.Question_1_payoff_pre_ns = n_asset_value_pre
         try:
-            self.Question_1_pre_int_s = int(self.Question_1_pre_ns)
+            self.Question_1_pre_int_s = int(self.Question_1_pre_s)
         except ValueError: 
             self.Question_1_pre_int_s = -2
 
@@ -532,8 +532,8 @@ class Player(markets_models.Player):
         else:
             self.Question_2_payoff_pre_ns = p_n
         ################### ### question 3 pre###################################
-        ##C correct ranking
-        C = self.ranking
+        ##C correct profit ranking
+        C = self.pranking
         ##R is the reported belief
         R = self.Question_3_pre_ns
         self.Question_3_payoff_pre_ns= (int) (100 - (math.pow((C - R),2)))
@@ -541,8 +541,8 @@ class Player(markets_models.Player):
         R = self.Question_3_pre_s
         self.Question_3_payoff_pre_s= (int) (100 - (math.pow((C - R),2)))
         ################### ### question 3 post###################################
-        ##C correct ranking
-        C = self.ranking
+        ##C correct profit ranking
+        C = self.pranking
         ##R is the reported belief
         R = self.Question_3_post
         self.Question_3_payoff_post= (int) (100 - (math.pow((C - R),2)))
