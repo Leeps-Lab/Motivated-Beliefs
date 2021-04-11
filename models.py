@@ -372,6 +372,9 @@ class Player(markets_models.Player):
     signal_nature = models.IntegerField()
     total_black = models.IntegerField()
     total_white = models.IntegerField()
+    Question_1_pre_int_ns = models.IntegerField()
+    Question_1_pre_int_s = models.IntegerField()
+    Question_1_post_int = models.IntegerField()
     total_black_low = models.IntegerField()
     total_black_high = models.IntegerField()
     Question_1_payoff_pre_ns = models.IntegerField(initial=0)
@@ -393,15 +396,15 @@ class Player(markets_models.Player):
     color = models.IntegerField()
     pair = models.IntegerField()
 ## Questions Pre
-    Question_1_pre_ns = models.IntegerField(min=0, max=100,
+    Question_1_pre_ns = models.StringField(
         label='''
         Your answer:'''
     )
-    Question_1_pre_s = models.IntegerField(min=0, max=100,
+    Question_1_pre_s = models.StringField(
         label='''
         Your answer:'''
     )
-    Question_1_post = models.IntegerField(min=0, max=100,
+    Question_1_post = models.StringField(
         label='''
         Your answer:'''
     )
@@ -466,18 +469,47 @@ class Player(markets_models.Player):
         n_asset_binomail_post = np.random.binomial(1, p_n_post/100)
         n_asset_value_post = n_asset_binomail_post*200 +100
          ################question 1 post#########################################
-        if self.Question_1_post>p_n_post:
+        try:
+            self.Question_1_post_int = int(self.Question_1_post)
+        except ValueError: 
+            self.Question_1_post_int = -2
+
+        if self.Question_1_post_int > 100:
+            self.Question_1_payoff_post = 0
+        elif self.Question_1_post_int < 0:
+            self.Question_1_payoff_post = 0
+
+        elif self.Question_1_post_int>p_n_post:
             self.Question_1_payoff_post = self.world_state*200 +100
         else:
             self.Question_1_payoff_post = n_asset_value_post
 
         ################question 1 pre#########################################
-        if self.Question_1_pre_ns>p_n_pre:
+        try:
+            self.Question_1_pre_int_ns = int(self.Question_1_pre_ns)
+        except ValueError: 
+            self.Question_1_pre_int_ns = -2
+
+        if self.Question_1_pre_int_ns > 100:
+            self.Question_1_payoff_post = 0
+        elif self.Question_1_pre_int_ns < 0:
+            self.Question_1_payoff_post = 0
+
+        if self.Question_1_pre_int_ns>p_n_pre:
             self.Question_1_payoff_pre_ns = self.world_state*200 +100
         else:
             self.Question_1_payoff_pre_ns = n_asset_value_pre
+        try:
+            self.Question_1_pre_int_s = int(self.Question_1_pre_ns)
+        except ValueError: 
+            self.Question_1_pre_int_s = -2
 
-        if self.Question_1_pre_s>p_n_pre:
+        if self.Question_1_pre_int_s > 100:
+            self.Question_1_payoff_post = 0
+        elif self.Question_1_pre_int_s < 0:
+            self.Question_1_payoff_post = 0
+
+        if self.Question_1_pre_int_s>p_n_pre:
             self.Question_1_payoff_pre_s = self.world_state*200 +100
         else:
             self.Question_1_payoff_pre_s = n_asset_value_pre

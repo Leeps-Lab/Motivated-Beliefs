@@ -23,9 +23,12 @@ class Pre_Trading_Survey_1(Page):
     def vars_for_template(self):
             
             def before_next_page(self):
-                self.player.Question_1_pre = -1
-                self.player.Question_2_pre = -1
-                self.player.Question_3_pre = -1
+                if self.player.Question_1_pre_ns == '':
+                    self.player.Question_1_pre_ns = '-1'
+                if self.player.Question_2_pre_ns == 0:
+                    self.player.Question_2_pre_ns = -1
+                if self.player.Question_3_pre_ns == 0:
+                    self.player.Question_3_pre_ns = -1
                 self.player.save()
     
             img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
@@ -63,9 +66,12 @@ class Pre_Trading_Survey_2(Page):
     def vars_for_template(self):
             
             def before_next_page(self):
-                self.player.Question_1_pre = -1
-                self.player.Question_2_pre = -1
-                self.player.Question_3_pre = -1
+                if self.player.Question_1_pre_s == '':
+                    self.player.Question_1_pre_s = '-1'
+                if self.player.Question_2_pre_s == 0:
+                    self.player.Question_2_pre_s = -1
+                if self.player.Question_3_pre_s == 0:
+                    self.player.Question_3_pre_s = -1
                 self.player.save()
     
             img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
@@ -140,9 +146,12 @@ class Post_Trading_Survey(BaseMarketPage):
     def vars_for_template(self):
             
             def before_next_page(self):
-                self.player.Question_1_post = -1
-                self.player.Question_2_post = -1
-                self.player.Question_3_post = -1
+                if self.player.Question_1_post == '':
+                    self.player.Question_1_post = '-1'
+                if self.player.Question_2_post == 0:
+                    self.player.Question_2_post= -1
+                if self.player.Question_3_post == 0:
+                    self.player.Question_3_post = -1
                 self.player.save()
 
             img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
