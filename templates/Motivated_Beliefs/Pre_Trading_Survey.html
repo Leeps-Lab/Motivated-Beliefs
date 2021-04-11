@@ -26,6 +26,9 @@
   text-align: center;
   color: white;
 }
+.dir{
+        font-size: 60%;
+    }
 </style>
 {% endblock %} 
 {% block scripts %}
@@ -82,14 +85,12 @@
     {% next_button %}
 </div>
     <div class = "signal">
-        <p>
-                The Computer Assinged you into
-            </p>
-            <p>
-                the H-group if your IQ score is higher than your paird plarer
-            </p>
-            <p>
+        <p class="dir">
+                <b>
+                The Computer Assinged you into<br>
+                the H-group if your IQ score is higher than your paird plarer<br>
                 the L-group if your IQ score is lower than your paird plarer
+                <b>
             </p>
     <img src="{{img_sig_url}}"/>
         <p>
