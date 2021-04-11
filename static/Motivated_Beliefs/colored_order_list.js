@@ -14,7 +14,7 @@ class ColoredOrderList extends OrderList{
                     box-sizing: border-box;
                 }
                 .my-bid-order {
-	                background-color: #3EF849;
+	                background-color: #F55607;
 	            }
                 .my-ask-order {
                     background-color: #00FDF5;

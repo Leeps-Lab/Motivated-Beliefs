@@ -43,7 +43,7 @@ class SingleAssetTextInterface extends PolymerElement {
                     min-height: 0;
                 }
                 .bid {
-                    background-color: #3EF849;
+                    background-color: #F55607;
                 }
                 .ask {
                     background-color: #00FDF5;

@@ -17,7 +17,7 @@ class ColoredTradeList extends TradeList{
                     box-sizing: border-box;
                 }
                 .my-trade-buy {
-	                background-color: #3EF849;
+	                background-color: #F55607;
 	            }
                 .my-trade-sell {
                     background-color: #00FDF5;
