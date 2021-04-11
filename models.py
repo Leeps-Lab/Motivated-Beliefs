@@ -374,9 +374,12 @@ class Player(markets_models.Player):
     total_white = models.IntegerField()
     total_black_low = models.IntegerField()
     total_black_high = models.IntegerField()
-    Question_1_payoff_pre = models.IntegerField(initial=0)
-    Question_2_payoff_pre = models.IntegerField(initial=0)
-    Question_3_payoff_pre = models.IntegerField(initial=0)
+    Question_1_payoff_pre_ns = models.IntegerField(initial=0)
+    Question_2_payoff_pre_ns = models.IntegerField(initial=0)
+    Question_3_payoff_pre_ns = models.IntegerField(initial=0)
+    Question_1_payoff_pre_s = models.IntegerField(initial=0)
+    Question_2_payoff_pre_s = models.IntegerField(initial=0)
+    Question_3_payoff_pre_s = models.IntegerField(initial=0)
     Question_1_payoff_post = models.IntegerField(initial=0)
     Question_2_payoff_post = models.IntegerField(initial=0)
     Question_3_payoff_post = models.IntegerField(initial=0)
@@ -390,7 +393,11 @@ class Player(markets_models.Player):
     color = models.IntegerField()
     pair = models.IntegerField()
 ## Questions Pre
-    Question_1_pre = models.IntegerField(min=0, max=100,
+    Question_1_pre_ns = models.IntegerField(min=0, max=100,
+        label='''
+        Your answer:'''
+    )
+    Question_1_pre_s = models.IntegerField(min=0, max=100,
         label='''
         Your answer:'''
     )
@@ -398,7 +405,11 @@ class Player(markets_models.Player):
         label='''
         Your answer:'''
     )
-    Question_2_pre = models.IntegerField(min=100, max=300,
+    Question_2_pre_ns = models.IntegerField(min=100, max=300,
+        label='''
+        Enter a number between 100 and 300.'''
+    )
+    Question_2_pre_s = models.IntegerField(min=100, max=300,
         label='''
         Enter a number between 100 and 300.'''
     )
@@ -406,7 +417,13 @@ class Player(markets_models.Player):
         label='''
         Enter a number between 100 and 300.'''
     )
-    Question_3_pre = models.IntegerField(
+    Question_3_pre_ns = models.IntegerField(
+        choices=[1,2,3,4,5,6,7,8],
+        label='''
+         Please choose one of the following.
+        '''
+    )
+    Question_3_pre_s = models.IntegerField(
         choices=[1,2,3,4,5,6,7,8],
         label='''
          Please choose one of the following.
@@ -455,10 +472,15 @@ class Player(markets_models.Player):
             self.Question_1_payoff_post = n_asset_value_post
 
         ################question 1 pre#########################################
-        if self.Question_1_pre>p_n_pre:
-            self.Question_1_payoff_pre = self.world_state*200 +100
+        if self.Question_1_pre_ns>p_n_pre:
+            self.Question_1_payoff_pre_ns = self.world_state*200 +100
         else:
-            self.Question_1_payoff_pre = n_asset_value_pre
+            self.Question_1_payoff_pre_ns = n_asset_value_pre
+
+        if self.Question_1_pre_s>p_n_pre:
+            self.Question_1_payoff_pre_s = self.world_state*200 +100
+        else:
+            self.Question_1_payoff_pre_s = n_asset_value_pre
         ################### ### question 2 post###################################
         p_n = random.randint(100,300)
         if self.Question_2_post>p_n:
@@ -467,16 +489,25 @@ class Player(markets_models.Player):
             self.Question_2_payoff_post = p_n
         ################### ### question 2 pre###################################
         p_n = random.randint(100,300)
-        if self.Question_2_pre>p_n:
-            self.Question_2_payoff_pre = self.world_state*200 +100
+        if self.Question_2_pre_s>p_n:
+            self.Question_2_payoff_pre_s = self.world_state*200 +100
         else:
-            self.Question_2_payoff_pre = p_n
+            self.Question_2_payoff_pre_s = p_n
+
+        p_n = random.randint(100,300)
+        if self.Question_2_pre_ns>p_n:
+            self.Question_2_payoff_pre_ns = self.world_state*200 +100
+        else:
+            self.Question_2_payoff_pre_ns = p_n
         ################### ### question 3 pre###################################
         ##C correct ranking
         C = self.ranking
         ##R is the reported belief
-        R = self.Question_3_pre
-        self.Question_3_payoff_pre= (int) (100 - (math.pow((C - R),2)))
+        R = self.Question_3_pre_ns
+        self.Question_3_payoff_pre_ns= (int) (100 - (math.pow((C - R),2)))
+
+        R = self.Question_3_pre_s
+        self.Question_3_payoff_pre_s= (int) (100 - (math.pow((C - R),2)))
         ################### ### question 3 post###################################
         ##C correct ranking
         C = self.ranking
@@ -484,22 +515,30 @@ class Player(markets_models.Player):
         R = self.Question_3_post
         self.Question_3_payoff_post= (int) (100 - (math.pow((C - R),2)))
         ### set to zero if did not answer survye questions
-        if self.Question_1_pre==-1:
-            self.Question_1_payoff_pre = 0
+        if self.Question_1_pre_ns==-1:
+            self.Question_1_payoff_pre_ns = 0
+        if self.Question_1_pre_s==-1:
+            self.Question_1_payoff_pre_s = 0
         if self.Question_1_post==-1:
             self.Question_1_payoff_post = 0
-        if self.Question_2_pre==-1:
-            self.Question_2_payoff_pre = 0
+        if self.Question_2_pre_ns==-1:
+            self.Question_2_payoff_pre_ns = 0
+        if self.Question_2_pre_s==-1:
+            self.Question_2_payoff_pre_s = 0
         if self.Question_2_post==-1:
             self.Question_2_payoff_post = 0
-        if self.Question_3_pre==-1:
-            self.Question_3_payoff_pre = 0
+        if self.Question_3_pre_ns==-1:
+            self.Question_3_payoff_pre_ns= 0
+        if self.Question_3_pre_s==-1:
+            self.Question_3_payoff_pre_s = 0
         if self.Question_3_post==-1:
             self.Question_3_payoff_post = 0
         ## set total payoff ###############################
         self.payoff_from_trading = self.profit
 
-        self.survey_avg_pay  = (int)((self.Question_1_payoff_pre + self.Question_2_payoff_pre + self.Question_3_payoff_pre + self.Question_1_payoff_post+self.Question_2_payoff_post+ self.Question_3_payoff_post)/6) 
+        self.survey_avg_pay  = (int)((self.Question_1_payoff_pre_s+self.Question_1_payoff_pre_ns + self.Question_2_payoff_pre_s + 
+            self.Question_2_payoff_pre_ns+  self.Question_3_payoff_pre_s + self.Question_3_payoff_pre_ns + self.Question_1_payoff_post+
+            self.Question_2_payoff_post+ self.Question_3_payoff_post)/9) 
         
         self.total_payoff = self.survey_avg_pay + self.payoff_from_trading
 

@@ -40,6 +40,10 @@ th, td{
 	font-size: 110%;
 	font-family: verdana;
 }
+.text-header-sub{
+	text-align: center;
+	font-family: verdana;
+}
 </style>
 
 {% endblock %}
@@ -47,9 +51,6 @@ th, td{
 	<div class = "results-container">
 		<div class = "state">
 			<div class = "text-header">
-				<br>
-					The true world state for this period is <b>{{state}}</b>
-				</br>
 				<br>
 					you own <b>{{shares}}</b> shares at the end of the period. 
 				</br>
@@ -68,9 +69,14 @@ th, td{
 									Post-Survey Payoffs
 								</td>
 						</tr>
+						<tr>
+								<td class = "text-header-sub">
+									Color only
+								</td>
+						</tr>
 						<tr class = "text-results">
 							<td>
-								Question 1: {{Question_1_pay_pre}}
+								Question 1: {{Question_1_pay_pre_ns}}
 							</td>
 							<td>
 								Question 1: {{Question_1_pay_post}}
@@ -78,7 +84,7 @@ th, td{
 						</tr>
 						<tr class = "text-results">
 							<td>
-								Question 2: {{Question_2_pay_pre}}
+								Question 2: {{Question_2_pay_pre_ns}}
 							</td>
 							<td>
 								Question 2: {{Question_2_pay_post}}
@@ -86,13 +92,31 @@ th, td{
 						</tr>
 						<tr class = "text-results">
 							<td>
-								Question 3: {{Question_3_pay_pre}}
+								Question 3: {{Question_3_pay_pre_ns}}
 							</td>
 							<td>
 								Question 3: {{Question_3_pay_post}}
 							</td>
+						<tr>
+								<td class = "text-header-sub">
+									Color and Private Signal
+								</td>
 						</tr>
-						</div>
+						<tr class = "text-results">
+							<td>
+								Question 1: {{Question_1_pay_pre_s}}
+							</td>
+						</tr>
+						<tr class = "text-results">
+							<td>
+								Question 2: {{Question_2_pay_pre_s}}
+							</td>
+						</tr>
+						<tr class = "text-results">
+							<td>
+								Question 3: {{Question_3_pay_pre_s}}
+							</td>
+						</tr>
 				</table>
 			</div>
 			<div class="avg">
@@ -103,7 +127,7 @@ th, td{
 				</div>
 				<div class = "text-results">
 					<br>
-					(1/6)({{Question_1_pay_pre}} + {{Question_2_pay_pre}} + {{Question_3_pay_pre}} + {{Question_1_pay_post}} + {{Question_2_pay_post}} + {{Question_3_pay_post}}) = {{payoff_from_survey}}
+					(1/9)({{Question_1_pay_pre_ns}} + {{Question_2_pay_pre_ns}} + {{Question_3_pay_pre_ns}} + {{Question_1_pay_pre_s}} + {{Question_2_pay_pre_s}} + {{Question_3_pay_pre_s}}+{{Question_1_pay_post}} + {{Question_2_pay_post}} + {{Question_3_pay_post}}) = {{payoff_from_survey}}
 					</br>
 				</div>
 			</div>

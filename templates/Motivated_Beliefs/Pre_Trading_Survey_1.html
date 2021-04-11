@@ -1,0 +1,112 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Pre Trading Survey
+{% endblock %}
+{% block styles %}
+<style>
+.survey-container{
+    display: flex;
+}
+.signal {
+    flex: 35%;
+}
+.signal img {
+    max-width: 100%;
+    height: auto;
+}
+.forms {
+    flex: 65%;
+}
+/* The alert message box */
+.modal-body {
+  padding: 2px 16px;
+  background-color: #d40404;
+  text-align: center;
+  color: white;
+}
+.dir{
+        font-size: 60%;
+    }
+</style>
+{% endblock %} 
+{% block scripts %}
+<div id="myModal" class="modal">
+     <div class="modal-content">
+            <div class="modal-body">
+              <p></b>Please Answer All The Questions</b></p>
+              <p>Then continue to the next page</p>
+            </div>
+      </div>
+</div>
+<script type="text/javascript">
+    var modal = document.getElementById("myModal");
+        setTimeout(
+            function () {
+                modal.style.display = "block";
+            },
+            15*1000 // 15 seconds
+        );
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+</script>
+{% endblock %}
+{% block content %}
+<body>
+<div class = "survey-container">
+
+<div class="forms"> 
+    <div> 
+        <p>
+            <b>
+                Please answer the following questions given you color.
+            </b>
+        </p>
+        <br>
+            <b> Question 1: </b> What do you think is the probability (out of 100) that the true state is 'G'?
+        </br>
+        {% formfield player.Question_1_pre_ns %}
+    </div>
+    <div> 
+        <br>
+                <b> Question 2: </b> What is the lowest price (between 100 and 300) at which you are willing to sell your asset.
+            </br>
+            <br>
+                {% formfield player.Question_2_pre_ns %}
+    </div>
+    <div>
+            <br>
+                <b> Question 3: </b> Of the 8 traders (yourself included), what do you think your rank will be in this period in terms of trading profit? (1 means top, 8 means bottom)
+            </br>
+            <br>
+                {% formfield player.Question_3_pre_ns %}
+            </br>
+        </br>
+    </div>
+    {% next_button %}
+</div>
+    <div class = "signal">
+        <p class="dir">
+                <b>
+                The Computer Assinged you into<br>
+                the H-group if your IQ score is higher than your paird plarer<br>
+                the L-group if your IQ score is lower than your paird plarer
+                <b>
+            </p>
+    <img src="{{img_sig_url}}"/>
+        <p>
+            {%if hi%}
+                <b>Your color in this period is <b style="color:#34e610">{{color}}</b><b>
+            {%else%}
+                <b>Your color in this period is <b style="color:#ff0000">{{color}}</b><b>
+            {%endif%}
+        </p>
+    </div>
+</body>
+{% endblock %}
+
+

@@ -10,7 +10,47 @@ class grouping(WaitPage):
 class Wait_for_trading(WaitPage):
     wait_for_all_groups = True
 
-class Pre_Trading_Survey(Page):
+class Pre_Trading_Survey_1(Page):
+    def get_timeout_seconds(self):
+        if self.subsession.round_number<=2:
+            return 30
+        else:
+            return 20
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.player.save()
+
+    def vars_for_template(self):
+            
+            def before_next_page(self):
+                self.player.Question_1_pre = -1
+                self.player.Question_2_pre = -1
+                self.player.Question_3_pre = -1
+                self.player.save()
+    
+            img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
+            img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+            if self.player.hi==1:
+                color = "Green"
+                hi = True
+            elif self.player.hi==0:
+                color = "Red"
+                hi = False
+            else:
+                color = None
+
+            return {
+                'signal1black': self.player.signal1_black,
+                'signal1white': self.player.signal1_white,
+                'img_url': img_url,
+                'img_sig_url': img_sig_url,
+                'color':color,
+                'hi': hi
+            }
+    form_model = 'player'
+    form_fields = ['Question_1_pre_ns', 'Question_2_pre_ns', 'Question_3_pre_ns']
+
+class Pre_Trading_Survey_2(Page):
     def get_timeout_seconds(self):
         if self.subsession.round_number<=2:
             return 30
@@ -49,7 +89,7 @@ class Pre_Trading_Survey(Page):
             }
 
     form_model = 'player'
-    form_fields = ['Question_1_pre', 'Question_2_pre', 'Question_3_pre']
+    form_fields = ['Question_1_pre_s', 'Question_2_pre_s', 'Question_3_pre_s']
 
 
 class Market(BaseMarketPage): 
@@ -163,9 +203,12 @@ class Results_survey(Page):
             'Question_1_pay_post': self.player.Question_1_payoff_post,
             'Question_2_pay_post': self.player.Question_2_payoff_post,
             'Question_3_pay_post': self.player.Question_3_payoff_post,
-            'Question_1_pay_pre': self.player.Question_1_payoff_pre,
-            'Question_2_pay_pre': self.player.Question_2_payoff_pre,
-            'Question_3_pay_pre': self.player.Question_3_payoff_pre,
+            'Question_1_pay_pre_ns': self.player.Question_1_payoff_pre_ns,
+            'Question_2_pay_pre_ns': self.player.Question_2_payoff_pre_ns,
+            'Question_3_pay_pre_ns': self.player.Question_3_payoff_pre_ns,
+            'Question_1_pay_pre_s': self.player.Question_1_payoff_pre_s,
+            'Question_2_pay_pre_s': self.player.Question_2_payoff_pre_s,
+            'Question_3_pay_pre_s': self.player.Question_3_payoff_pre_s,
             'payoff_from_survey': self.player.survey_avg_pay, 
         }
 class Results_total(Page):
@@ -197,18 +240,20 @@ class Results_sum(Page):
             'Question_1_pay_post': self.player.Question_1_payoff_post,
             'Question_2_pay_post': self.player.Question_2_payoff_post,
             'Question_3_pay_post': self.player.Question_3_payoff_post,
-            'Question_1_pay_pre': self.player.Question_1_payoff_pre,
-            'Question_2_pay_pre': self.player.Question_2_payoff_pre,
-            'Question_3_pay_pre': self.player.Question_3_payoff_pre,
+            'Question_1_pay_pre_ns': self.player.Question_1_payoff_pre_ns,
+            'Question_2_pay_pre_ns': self.player.Question_2_payoff_pre_ns,
+            'Question_3_pay_pre_ns': self.player.Question_3_payoff_pre_ns,
+            'Question_1_pay_pre_s': self.player.Question_1_payoff_pre_s,
+            'Question_2_pay_pre_s': self.player.Question_2_payoff_pre_s,
+            'Question_3_pay_pre_s': self.player.Question_3_payoff_pre_s,
             'profit': self.player.profit,
             'asset_value': self.player.asset_value,
             'cash_flow': self.player.settled_cash,
             'payoff_from_survey': self.player.survey_avg_pay, 
             'payoff_from_trading': self.player.payoff_from_trading,
             'total_pay':self.player.total_payoff,
-            'state': state,
             'shares': self.player.shares
         }
 
 
-page_sequence = [grouping, Wait_for_trading, Pre_Trading_Survey, Wait_for_trading, Market, Post_Trading_Survey, Wait, Results_state, Results_trading, Results_survey, Results_total, Results_sum]
+page_sequence = [grouping, Wait_for_trading, Pre_Trading_Survey_1,Pre_Trading_Survey_2, Wait_for_trading, Market, Post_Trading_Survey, Wait, Results_state, Results_trading, Results_survey, Results_total, Results_sum]
