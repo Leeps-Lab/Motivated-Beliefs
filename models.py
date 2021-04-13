@@ -95,14 +95,8 @@ class Subsession(markets_models.Subsession):
     ##
     ######################################################################
     def set_player_id(self):
-        rank = []
         for player in self.get_players():
-            #print(player.participant.vars['ranking'])
-            #rank.append((player, player.participant.vars['ranking']))
             player.iqranking = player.participant.vars['ranking']
-            ### sort by rankinng
-            ## set playing id in group useing tupple..
-        #print(rank)
     #######################################################################
     ### sets the players signals 
     ### treat, player
@@ -111,7 +105,6 @@ class Subsession(markets_models.Subsession):
             player_bb = self.get_bb_array(treat)
             i=0
             for p in self.get_players():
-                print(p.iqranking)
                 i=p.iqranking-1
                 p.signal1_black = player_bb[i]
                 p.signal1_white = 1-p.signal1_black
@@ -121,7 +114,7 @@ class Subsession(markets_models.Subsession):
     #######################################################################
     def make_pairs(self,treat,state):
         player_pairs = self.get_pairs_array()
-        random_colors = self.get_random_pp()
+        random_colors_control = self.get_random_pp()
         i=0
         for p in self.get_players():
             p.pair = player_pairs[i]
@@ -137,7 +130,7 @@ class Subsession(markets_models.Subsession):
                     else:
                         p.hi = 1
             else:
-                p.hi = random_colors[i]
+                p.hi = random_colors_control[i]
             i=i+1
     ######################################################################
     ######################################################################
@@ -499,6 +492,7 @@ class Player(markets_models.Player):
             self.Question_1_payoff_pre_ns = self.world_state*200 +100
         else:
             self.Question_1_payoff_pre_ns = n_asset_value_pre
+
         try:
             self.Question_1_pre_int_s = int(self.Question_1_pre_s)
         except ValueError: 
@@ -536,10 +530,10 @@ class Player(markets_models.Player):
         C = self.pranking
         ##R is the reported belief
         R = self.Question_3_pre_ns
-        self.Question_3_payoff_pre_ns= (int) (100 - (math.pow((C - R),2)))
+        self.Question_3_payoff_pre_ns = (int) (100 - (math.pow((C - R),2)))
 
         R = self.Question_3_pre_s
-        self.Question_3_payoff_pre_s= (int) (100 - (math.pow((C - R),2)))
+        self.Question_3_payoff_pre_s = (int) (100 - (math.pow((C - R),2)))
         ################### ### question 3 post###################################
         ##C correct profit ranking
         C = self.pranking

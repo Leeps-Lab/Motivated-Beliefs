@@ -3,7 +3,6 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from ._builtin import Page, WaitPage
 
 class grouping(WaitPage):
-
     wait_for_all_groups = True
     after_all_players_arrive = 'grouping'
 
