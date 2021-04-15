@@ -17,19 +17,19 @@ class Pre_Trading_Survey_1(Page):
             return 20
     def before_next_page(self):
         if self.timeout_happened:
+            if self.player.Question_1_pre_ns == '':
+                self.player.Question_1_pre_ns = '-1'
+            if self.player.Question_2_pre_ns == 0:
+                self.player.Question_2_pre_ns = -1
+            if self.player.Question_3_pre_ns == 0:
+                self.player.Question_3_pre_ns = -1
             self.player.save()
 
     def vars_for_template(self):
             
             def before_next_page(self):
-                if self.player.Question_1_pre_ns == '':
-                    self.player.Question_1_pre_ns = '-1'
-                if self.player.Question_2_pre_ns == 0:
-                    self.player.Question_2_pre_ns = -1
-                if self.player.Question_3_pre_ns == 0:
-                    self.player.Question_3_pre_ns = -1
                 self.player.save()
-    
+
             img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
             img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
             if self.player.hi==1:
@@ -58,19 +58,19 @@ class Pre_Trading_Survey_2(Page):
             return 30
         else:
             return 20
+
     def before_next_page(self):
         if self.timeout_happened:
+            if self.player.Question_1_pre_s == '':
+                self.player.Question_1_pre_s = '-1'
+            if self.player.Question_2_pre_s == 0:
+                self.player.Question_2_pre_s = -1
+            if self.player.Question_3_pre_s == 0:
+                self.player.Question_3_pre_s = -1
             self.player.save()
 
     def vars_for_template(self):
-            
             def before_next_page(self):
-                if self.player.Question_1_pre_s == '':
-                    self.player.Question_1_pre_s = '-1'
-                if self.player.Question_2_pre_s == 0:
-                    self.player.Question_2_pre_s = -1
-                if self.player.Question_3_pre_s == 0:
-                    self.player.Question_3_pre_s = -1
                 self.player.save()
     
             img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
@@ -139,18 +139,18 @@ class Post_Trading_Survey(BaseMarketPage):
             return 20
     def before_next_page(self):
         if self.timeout_happened:
+            if self.player.Question_1_post == '':
+                self.player.Question_1_post = '-1'
+            if self.player.Question_2_post == 0:
+                self.player.Question_2_post= -1
+            if self.player.Question_3_post == 0:
+                self.player.Question_3_post = -1
             self.player.save()
 
 
     def vars_for_template(self):
-            
+
             def before_next_page(self):
-                if self.player.Question_1_post == '':
-                    self.player.Question_1_post = '-1'
-                if self.player.Question_2_post == 0:
-                    self.player.Question_2_post= -1
-                if self.player.Question_3_post == 0:
-                    self.player.Question_3_post = -1
                 self.player.save()
 
             img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
@@ -180,6 +180,7 @@ class Wait(WaitPage):
     wait_for_all_groups = True
     
     after_all_players_arrive = 'set_payoffs'
+    
 class Results_state(Page):
     def get_timeout_seconds(self):
         return 8
