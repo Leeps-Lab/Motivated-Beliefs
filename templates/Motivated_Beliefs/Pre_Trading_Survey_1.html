@@ -2,7 +2,7 @@
 {% load otree %}
 
 {% block title %}
-    Pre Trading Survey
+    Pre Trading Survey 1
 {% endblock %}
 {% block styles %}
 <style>
@@ -61,26 +61,25 @@
 
 <div class="forms"> 
     <div> 
-        <p>
-            <b>
-                Please answer the following questions given you color.
-            </b>
-        </p>
         <br>
-            <b> Question 1: </b> What do you think is the probability (out of 100) that the true state is 'G'?
+            <b> Question 1: </b> What do you think is the probability (out of 100) that <br>
+             the true state is 'G'?
         </br>
         {% formfield player.Question_1_pre_ns %}
     </div>
     <div> 
         <br>
-                <b> Question 2: </b> What is the lowest price (between 400 and 600) at which you are willing to sell your asset.
+                <b> Question 2: </b> What is the lowest price (between 400 and 600) at which <br>
+                 you are willing to sell your asset?
             </br>
             <br>
                 {% formfield player.Question_2_pre_ns %}
     </div>
     <div>
             <br>
-                <b> Question 3: </b> Of the 8 traders (yourself included), what do you think your rank will be in this period in terms of trading profit? (1 means top, 8 means bottom)
+                <b> Question 3: </b> Of the 8 traders (yourself included), what do you think <br>
+                your rank will be in this period in terms of trading profit? <br>
+                (1 means top, 8 means bottom)
             </br>
             <br>
                 {% formfield player.Question_3_pre_ns %}
@@ -92,7 +91,7 @@
     <div class = "signal">
         <p class="dir">
                 <b>
-                The Computer Assinged you into group<br>
+                The Computer assigned you into group<br>
                 H if your IQ rank is higher than your paired player<br>
                 L if your IQ rank is lower than your paired player
                 <b>

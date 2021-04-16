@@ -454,13 +454,17 @@ class Player(markets_models.Player):
     #######################################################################
     def set_total_payoff(self):
         ###################question 1 post#####################################
-        p_n_pre = random.randint(0,99)
-        n_asset_binomail_pre = np.random.binomial(1, p_n_pre/100)
-        n_asset_value_pre = n_asset_binomail_pre*200 +100
+        p_n_pre_ns = random.randint(0,99)
+        n_asset_binomail_pre_ns = np.random.binomial(1, p_n_pre_ns/100)
+        n_asset_value_pre_ns = n_asset_binomail_pre_ns*200 +400
+        #######################################################################
+        p_n_pre_s = random.randint(0,99)
+        n_asset_binomail_pre_s = np.random.binomial(1, p_n_pre_s/100)
+        n_asset_value_pre_s = n_asset_binomail_pre_s*200 +400
         #######################################################################
         p_n_post = random.randint(0,99)
         n_asset_binomail_post = np.random.binomial(1, p_n_post/100)
-        n_asset_value_post = n_asset_binomail_post*200 +100
+        n_asset_value_post = n_asset_binomail_post*200 +400
          ################question 1 post#########################################
         try:
             self.Question_1_post_int = int(self.Question_1_post)
@@ -473,7 +477,7 @@ class Player(markets_models.Player):
             self.Question_1_payoff_post = 0
 
         elif self.Question_1_post_int>p_n_post:
-            self.Question_1_payoff_post = self.world_state*200 +100
+            self.Question_1_payoff_post = self.world_state*200 +400
         else:
             self.Question_1_payoff_post = n_asset_value_post
 
@@ -484,14 +488,14 @@ class Player(markets_models.Player):
             self.Question_1_pre_int_ns = -2
 
         if self.Question_1_pre_int_ns > 100:
-            self.Question_1_payoff_post = 0
+            self.Question_1_payoff_pre_ns = 0
         elif self.Question_1_pre_int_ns < 0:
-            self.Question_1_payoff_post = 0
+            self.Question_1_payoff_pre_ns = 0
 
-        if self.Question_1_pre_int_ns>p_n_pre:
-            self.Question_1_payoff_pre_ns = self.world_state*200 +100
+        if self.Question_1_pre_int_ns>p_n_pre_ns:
+            self.Question_1_payoff_pre_ns = self.world_state*200 +400
         else:
-            self.Question_1_payoff_pre_ns = n_asset_value_pre
+            self.Question_1_payoff_pre_ns = n_asset_value_pre_ns
 
         try:
             self.Question_1_pre_int_s = int(self.Question_1_pre_s)
@@ -499,14 +503,14 @@ class Player(markets_models.Player):
             self.Question_1_pre_int_s = -2
 
         if self.Question_1_pre_int_s > 100:
-            self.Question_1_payoff_post = 0
+            self.Question_1_payoff_pre_s = 0
         elif self.Question_1_pre_int_s < 0:
-            self.Question_1_payoff_post = 0
+            self.Question_1_payoff_pre_s = 0
 
-        if self.Question_1_pre_int_s>p_n_pre:
-            self.Question_1_payoff_pre_s = self.world_state*200 +100
+        if self.Question_1_pre_int_s>p_n_pre_s:
+            self.Question_1_payoff_pre_s = self.world_state*200 +400
         else:
-            self.Question_1_payoff_pre_s = n_asset_value_pre
+            self.Question_1_payoff_pre_s = n_asset_value_pre_s
         ################### ### question 2 post###################################
         p_n = random.randint(400,600)
         if self.Question_2_post>p_n:
