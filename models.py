@@ -401,15 +401,15 @@ class Player(markets_models.Player):
         label='''
         Your answer:'''
     )
-    Question_2_pre_ns = models.IntegerField(min=100, max=300,
+    Question_2_pre_ns = models.IntegerField(min=400, max=600,
         label='''
         Enter a number between 100 and 300.'''
     )
-    Question_2_pre_s = models.IntegerField(min=100, max=300,
+    Question_2_pre_s = models.IntegerField(min=400, max=600,
         label='''
         Enter a number between 100 and 300.'''
     )
-    Question_2_post = models.IntegerField(min=100, max=300,
+    Question_2_post = models.IntegerField(min=400, max=600,
         label='''
         Enter a number between 100 and 300.'''
     )
@@ -508,21 +508,21 @@ class Player(markets_models.Player):
         else:
             self.Question_1_payoff_pre_s = n_asset_value_pre
         ################### ### question 2 post###################################
-        p_n = random.randint(100,300)
+        p_n = random.randint(400,600)
         if self.Question_2_post>p_n:
-            self.Question_2_payoff_post = self.world_state*200 +100
+            self.Question_2_payoff_post = self.world_state*200 +400
         else:
             self.Question_2_payoff_post = p_n
         ################### ### question 2 pre###################################
-        p_n = random.randint(100,300)
+        p_n = random.randint(400,600)
         if self.Question_2_pre_s>p_n:
-            self.Question_2_payoff_pre_s = self.world_state*200 +100
+            self.Question_2_payoff_pre_s = self.world_state*200 +400
         else:
             self.Question_2_payoff_pre_s = p_n
 
-        p_n = random.randint(100,300)
+        p_n = random.randint(400,600)
         if self.Question_2_pre_ns>p_n:
-            self.Question_2_payoff_pre_ns = self.world_state*200 +100
+            self.Question_2_payoff_pre_ns = self.world_state*200 +400
         else:
             self.Question_2_payoff_pre_ns = p_n
         ################### ### question 3 pre###################################
