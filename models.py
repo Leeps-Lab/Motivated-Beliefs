@@ -403,15 +403,15 @@ class Player(markets_models.Player):
     )
     Question_2_pre_ns = models.IntegerField(min=400, max=600,
         label='''
-        Enter a number between 100 and 300.'''
+        Enter a number between 400 and 600.'''
     )
     Question_2_pre_s = models.IntegerField(min=400, max=600,
         label='''
-        Enter a number between 100 and 300.'''
+        Enter a number between 400 and 600.'''
     )
     Question_2_post = models.IntegerField(min=400, max=600,
         label='''
-        Enter a number between 100 and 300.'''
+        Enter a number between 400 and 600.'''
     )
     Question_3_pre_ns = models.IntegerField(
         choices=[1,2,3,4,5,6,7,8],
@@ -438,11 +438,11 @@ class Player(markets_models.Player):
         self.shares = self.settled_assets['A']
         old_asset_value = 0
         if self.world_state==1:
-            self.asset_value = self.shares*300
+            self.asset_value = self.shares*600
             self.profit = self.asset_value + self.settled_cash
              ## bad state
         else:
-            self.asset_value = self.shares*100
+            self.asset_value = self.shares*400
             self.profit =  self.asset_value + self.settled_cash
     #######################################################################
     ### sets the proft for an indivdual player 
