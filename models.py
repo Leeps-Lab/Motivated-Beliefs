@@ -22,14 +22,14 @@ class Constants(BaseConstants):
         'cash_endowment': int,
         'allow_short': bool,
         'state': int,
-        'rank_1_treat': int, 
-        'rank_2_treat': int, 
-        'rank_3_treat': int, 
-        'rank_4_treat': int, 
-        'rank_5_treat': int, 
-        'rank_6_treat': int, 
-        'rank_7_treat': int, 
-        'rank_8_treat': int,
+        'rank_1_hi_treat': int, 
+        'rank_2_hi_treat': int, 
+        'rank_3_hi_treat': int, 
+        'rank_4_hi_treat': int, 
+        'rank_5_hi_treat': int, 
+        'rank_6_hi_treat': int, 
+        'rank_7_hi_treat': int, 
+        'rank_8_hi_treat': int,
         'treat': int, 
         'rank_1_treat': int, 
         'rank_2_treat': int, 
@@ -113,8 +113,8 @@ class Subsession(markets_models.Subsession):
     ### treat, player
     #######################################################################
     def set_colors(self,treat,state):
-        player_pairs = self.get_pairs_array()
-        random_colors_control = self.get_random_pp()
+        random_colors_control = self.get_player_colors()
+        random_colors_control = self.get_player_colors_con()
         i=0
         for p in self.get_players():
             if treat == 1:  
@@ -123,16 +123,12 @@ class Subsession(markets_models.Subsession):
                 p.hi = random_colors_control[i]
             i=i+1
     ######################################################################
-    def get_random_pp(self):
-        return [self.config.rank_1_hi,self.config.rank_2_hi, self.config.rank_3_hi, self.config.rank_4_hi, 
-                self.config.rank_5_hi, self.config.rank_6_hi,self.config.rank_7_hi, self.config.rank_8_hi]
-    #######################################################################
-    ### get group array
-    ### 
-    #######################################################################
-    def get_pairs_array(self):
-        return [self.config.rank_1_pair,self.config.rank_2_pair, self.config.rank_3_pair, self.config.rank_4_pair, 
-                self.config.rank_5_pair, self.config.rank_6_pair,self.config.rank_7_pair, self.config.rank_8_pair]
+    def get_player_colors(self):
+        return [self.config.rank_1_hi_treat,self.config.rank_2_hi_treat, self.config.rank_3_hi_treat, self.config.rank_4_hi_treat, 
+                self.config.rank_5_hi_treat, self.config.rank_6_hi_treat,self.config.rank_7_hi_treat, self.config.rank_8_hi_treat]
+    def get_player_colors_con(self):
+        return [self.config.rank_1_hi_con,self.config.rank_2_hi_con, self.config.rank_3_hi_con, self.config.rank_4_hi_con, 
+                self.config.rank_5_hi_con, self.config.rank_6_hi_con,self.config.rank_7_hi_con, self.config.rank_8_hi_con]
     #######################################################################
     ### creates an array of rank private signals  
     ### 
@@ -237,7 +233,7 @@ class Group(markets_models.Group):
             if best_bid and best_bid.pcode == enter_msg['pcode'] and enter_msg['price'] <= best_bid.price:
                 self._send_error(enter_msg['pcode'], 'Cannot enter an ask that crosses your own bid')
                 return
-        if enter_msg['price'] >300 or enter_msg['price'] <100:
+        if enter_msg['price'] >600 or enter_msg['price'] <400:
             return
         
         super()._on_enter_event(event)

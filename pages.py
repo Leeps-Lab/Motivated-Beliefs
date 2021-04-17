@@ -269,4 +269,4 @@ class Results_sum(Page):
         }
 
 
-page_sequence = [grouping, Wait_for_trading, Pre_Trading_Survey_1,Pre_Trading_Survey_2, Wait_for_trading, Market, Post_Trading_Survey, Wait, Results_trading, Results_survey, Results_total, Results_sum]
+page_sequence = [grouping, Wait_for_trading, Pre_Trading_Survey_1, Pre_Trading_Survey_2, Wait_for_trading, Market, Post_Trading_Survey, Wait, Results_trading, Results_survey, Results_total, Results_sum]
