@@ -193,7 +193,7 @@ class SingleAssetTextInterface extends PolymerElement {
             this.$.log.error('Invalid order entered');
             return;
         }
-        if (price<100 || price>300){
+        if (price<400 || price>600){
             this.$.log.error('Invalid price entered');
             return;
         }       
