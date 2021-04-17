@@ -2,7 +2,7 @@
 {% load otree %}
 
 {% block title %}
-    Pre Trading Survey
+    Pre Trading Survey 2
 {% endblock %}
 {% block styles %}
 <style>
@@ -26,6 +26,9 @@
   text-align: center;
   color: white;
 }
+#id_Question_1_pre_s.form-control {
+    max-width: 100px;
+}
 .dir{
         font-size: 80%;
     }
@@ -39,7 +42,7 @@
      <div class="modal-content">
             <div class="modal-body">
               <p></b>Please Answer All The Questions</b></p>
-              <p>Then continue to the next page</p>
+              <p>Then click Next to continue to the next page</p>
             </div>
       </div>
 </div>
@@ -64,27 +67,24 @@
 
 <div class="forms"> 
     <div> 
-    	<p>
-            <b>
-                Please update your beleifs given your color and now your private signala.
-                Use this additional information to answer the questions again.
-            </b>
-        </p>
         <br>
-            <b> Question 1: </b> What do you think is the probability (out of 100) that the true state is 'G'?
+            <b> Question 1: </b> What do you think is the probability (out of 100) that <br>
+            the true state is 'G'?
         </br>
         {% formfield player.Question_1_pre_s %}
     </div>
     <div> 
         <br>
-                <b> Question 2: </b> What is the lowest price (between 400 and 600) at which you are willing to sell your asset.
+                <b> Question 2: </b> What is the lowest price (between 400 and 600) at which <br>
+                you are willing to sell your asset?
             </br>
             <br>
                 {% formfield player.Question_2_pre_s %}
     </div>
     <div>
             <br>
-                <b> Question 3: </b> Of the 8 traders (yourself included), what do you think your rank will be in this period in terms of trading profit? (1 means top, 8 means bottom)
+                <b> Question 3: </b> Of the 8 traders (yourself included), what do you think <br>
+                 your rank will be in this period in terms of trading profit? 
             </br>
             <br>
                 {% formfield player.Question_3_pre_s %}
@@ -96,9 +96,9 @@
     <div class = "signal">
         <p class="dir">
                 <b>
-                The Computer Assinged you into<br>
-                the H-group if your IQ score is higher than your paird plarer<br>
-                the L-group if your IQ score is lower than your paird plarer
+                The Computer assigned you into group<br>
+                H if your IQ rank is higher than your paired player<br>
+                L if your IQ rank is lower than your paired player
                 <b>
             </p>
     <img src="{{img_sig_url}}"/>
@@ -110,8 +110,8 @@
             {%endif%}
         </p>
         <b>
-                <br>Your private signal</br>
-                <br style="font-size:300%"> {{ signal1black }} Black Balls and {{ signal1white }} White Balls.</br>
+                <br>Your private signal is
+                <br style="font-size:300%"> {{ signal1black }} Black Ball and {{ signal1white }} White Ball.
             <br>
         <img src="{{img_url}}"/>
         </br>
