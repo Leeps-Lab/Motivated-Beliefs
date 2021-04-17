@@ -22,39 +22,39 @@ class Constants(BaseConstants):
         'cash_endowment': int,
         'allow_short': bool,
         'state': int,
-        'player_1_pair': int, 
-        'player_2_pair': int, 
-        'player_3_pair': int, 
-        'player_4_pair': int, 
-        'player_5_pair': int, 
-        'player_6_pair': int, 
-        'player_7_pair': int, 
-        'player_8_pair': int,
+        'rank_1_treat': int, 
+        'rank_2_treat': int, 
+        'rank_3_treat': int, 
+        'rank_4_treat': int, 
+        'rank_5_treat': int, 
+        'rank_6_treat': int, 
+        'rank_7_treat': int, 
+        'rank_8_treat': int,
         'treat': int, 
-        'player_1_treat': int, 
-        'player_2_treat': int, 
-        'player_3_treat': int, 
-        'player_4_treat': int, 
-        'player_5_treat': int, 
-        'player_6_treat': int, 
-        'player_7_treat': int, 
-        'player_8_treat': int, 
-        'player_1_con': int, 
-        'player_2_con': int, 
-        'player_3_con': int, 
-        'player_4_con': int, 
-        'player_5_con': int, 
-        'player_6_con': int, 
-        'player_7_con': int, 
-        'player_8_con': int,
-        'player_1_hi': int, 
-        'player_2_hi': int, 
-        'player_3_hi': int, 
-        'player_4_hi': int, 
-        'player_5_hi': int, 
-        'player_6_hi': int, 
-        'player_7_hi': int, 
-        'player_8_hi': int
+        'rank_1_treat': int, 
+        'rank_2_treat': int, 
+        'rank_3_treat': int, 
+        'rank_4_treat': int, 
+        'rank_5_treat': int, 
+        'rank_6_treat': int, 
+        'rank_7_treat': int, 
+        'rank_8_treat': int, 
+        'rank_1_con': int, 
+        'rank_2_con': int, 
+        'rank_3_con': int, 
+        'rank_4_con': int, 
+        'rank_5_con': int, 
+        'rank_6_con': int, 
+        'rank_7_con': int, 
+        'rank_8_con': int,
+        'rank_1_hi_con': int, 
+        'rank_2_hi_con': int, 
+        'rank_3_hi_con': int, 
+        'rank_4_hi_con': int, 
+        'rank_5_hi_con': int, 
+        'rank_6_hi_con': int, 
+        'rank_7_hi_con': int, 
+        'rank_8_hi_con': int
     }
 
 
@@ -78,7 +78,7 @@ class Subsession(markets_models.Subsession):
     def grouping(self):
         self.set_player_id()
         self.set_balls_signal(self.config.treat)
-        self.make_pairs(self.config.treat, self.config.state)
+        self.set_colors(self.config.treat, self.config.state)
          ### get totals 
         total_black = self.get_black_balls()
         total_white = self.get_white_balls()
@@ -112,49 +112,38 @@ class Subsession(markets_models.Subsession):
     ### sets the pairs for player and color
     ### treat, player
     #######################################################################
-    def make_pairs(self,treat,state):
+    def set_colors(self,treat,state):
         player_pairs = self.get_pairs_array()
         random_colors_control = self.get_random_pp()
         i=0
         for p in self.get_players():
-            p.pair = player_pairs[i]
             if treat == 1:  
-                if state == 1:
-                    if p.iqranking > p.pair:
-                        p.hi = 1
-                    else:
-                        p.hi = 0
-                else:
-                    if p.iqranking > p.pair:
-                        p.hi = 0
-                    else:
-                        p.hi = 1
+                p.hi = random_colors_control[i]
             else:
                 p.hi = random_colors_control[i]
             i=i+1
     ######################################################################
-    ######################################################################
     def get_random_pp(self):
-        return [self.config.player_1_hi,self.config.player_2_hi, self.config.player_3_hi, self.config.player_4_hi, 
-                self.config.player_5_hi, self.config.player_6_hi,self.config.player_7_hi, self.config.player_8_hi]
+        return [self.config.rank_1_hi,self.config.rank_2_hi, self.config.rank_3_hi, self.config.rank_4_hi, 
+                self.config.rank_5_hi, self.config.rank_6_hi,self.config.rank_7_hi, self.config.rank_8_hi]
     #######################################################################
     ### get group array
     ### 
     #######################################################################
     def get_pairs_array(self):
-        return [self.config.player_1_pair,self.config.player_2_pair, self.config.player_3_pair, self.config.player_4_pair, 
-                self.config.player_5_pair, self.config.player_6_pair,self.config.player_7_pair, self.config.player_8_pair]
+        return [self.config.rank_1_pair,self.config.rank_2_pair, self.config.rank_3_pair, self.config.rank_4_pair, 
+                self.config.rank_5_pair, self.config.rank_6_pair,self.config.rank_7_pair, self.config.rank_8_pair]
     #######################################################################
-    ### creates an array of player private signals  
+    ### creates an array of rank private signals  
     ### 
     #######################################################################
     def get_bb_array(self, treat):
         if treat==1:
-            return [self.config.player_1_treat,self.config.player_2_treat, self.config.player_3_treat, self.config.player_4_treat, 
-                    self.config.player_5_treat, self.config.player_6_treat,self.config.player_7_treat, self.config.player_8_treat]
+            return [self.config.rank_1_treat,self.config.rank_2_treat, self.config.rank_3_treat, self.config.rank_4_treat, 
+                    self.config.rank_5_treat, self.config.rank_6_treat,self.config.rank_7_treat, self.config.rank_8_treat]
         else:
-            return [self.config.player_1_con,self.config.player_2_con, self.config.player_3_con, self.config.player_4_con, 
-                    self.config.player_5_con, self.config.player_6_con,self.config.player_7_con, self.config.player_8_con]
+            return [self.config.rank_1_con,self.config.rank_2_con, self.config.rank_3_con, self.config.rank_4_con, 
+                    self.config.rank_5_con, self.config.rank_6_con,self.config.rank_7_con, self.config.rank_8_con]
 
     #######################################################################
     ### sets all profits players 
