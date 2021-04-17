@@ -357,6 +357,10 @@ class Player(markets_models.Player):
     pranking = models.IntegerField()
     iqranking = models.IntegerField()
     profit = models.IntegerField()
+    contingent_trading_profit_G = models.IntegerField()
+    contingent_trading_profit_B = models.IntegerField()
+    contingent_total_payoff_G = models.IntegerField()
+    contingent_total_payoff_B = models.IntegerField()
     total_payoff = models.IntegerField()
     payment_signal1 = models.IntegerField()
     world_state = models.IntegerField()
@@ -416,19 +420,19 @@ class Player(markets_models.Player):
     Question_3_pre_ns = models.IntegerField(
         choices=[1,2,3,4,5,6,7,8],
         label='''
-         Please choose one of the following.
+         Please choose one of the following (1 means top, 8 means bottom)
         '''
     )
     Question_3_pre_s = models.IntegerField(
         choices=[1,2,3,4,5,6,7,8],
         label='''
-         Please choose one of the following.
+         Please choose one of the following (1 means top, 8 means bottom)
         '''
     )
     Question_3_post = models.IntegerField(
         choices=[1,2,3,4,5,6,7,8],
         label='''
-         Please choose one of the following.
+         Please choose one of the following (1 means top, 8 means bottom)
         '''
     )
     #######################################################################
@@ -437,6 +441,9 @@ class Player(markets_models.Player):
     def set_profit(self):
         self.shares = self.settled_assets['A']
         old_asset_value = 0
+        self.contingent_trading_profit_G = self.settled_cash + self.shares*600
+        self.contingent_trading_profit_B = self.settled_cash + self.shares*400
+
         if self.world_state==1:
             self.asset_value = self.shares*600
             self.profit = self.asset_value + self.settled_cash
@@ -444,6 +451,8 @@ class Player(markets_models.Player):
         else:
             self.asset_value = self.shares*400
             self.profit =  self.asset_value + self.settled_cash
+
+         
     #######################################################################
     ### sets the proft for an indivdual player 
     #######################################################################
@@ -571,7 +580,8 @@ class Player(markets_models.Player):
             self.Question_2_payoff_post+ self.Question_3_payoff_post)/9) 
         
         self.total_payoff = self.survey_avg_pay + self.payoff_from_trading
-
+        self.contingent_total_payoff_G = self.survey_avg_pay + self.contingent_trading_profit_G
+        self.contingent_total_payoff_B = self.survey_avg_pay + self.contingent_trading_profit_B
         ## sets payoff to best payoff per round 
         conversion_rate = .0017
         if self.subsession.round_number > 2:

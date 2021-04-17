@@ -171,7 +171,8 @@ class Wait(WaitPage):
     wait_for_all_groups = True
     
     after_all_players_arrive = 'set_payoffs'
-    
+
+"""    
 class Results_state(Page):
     def get_timeout_seconds(self):
         return 8
@@ -185,15 +186,19 @@ class Results_state(Page):
         'shares': self.player.shares,
         'state': state,
         }
+"""
 class Results_trading(Page):
     def get_timeout_seconds(self):
         return 8
     def vars_for_template(self): 
         return{
-            'profit': self.player.profit,
-            'asset_value': self.player.asset_value,
-            'cash_flow': self.player.settled_cash,
-            'payoff_from_trading': self.player.payoff_from_trading,
+            'shares': self.player.shares,
+#            'profit': self.player.profit,
+#            'asset_value': self.player.asset_value,
+             'cash_flow': self.player.settled_cash,
+#            'payoff_from_trading': self.player.payoff_from_trading,
+            'contingent_trading_profit_G': self.player.contingent_trading_profit_G,
+            'contingent_trading_profit_B': self.player.contingent_trading_profit_B,
         }
 class Results_survey(Page):
     def get_timeout_seconds(self):
@@ -216,9 +221,13 @@ class Results_total(Page):
         return 8
     def vars_for_template(self): 
         return{
-            'total_pay':self.player.total_payoff,
+#            'total_pay':self.player.total_payoff,
             'payoff_from_survey': self.player.survey_avg_pay, 
-            'payoff_from_trading': self.player.payoff_from_trading
+#            'payoff_from_trading': self.player.payoff_from_trading,
+            'contingent_trading_profit_G': self.player.contingent_trading_profit_G,
+            'contingent_trading_profit_B': self.player.contingent_trading_profit_B,
+            'contingent_total_payoff_G': self.player.contingent_total_payoff_G,
+            'contingent_total_payoff_B': self.player.contingent_total_payoff_B,
         }
 class Results_sum(Page):
     def get_timeout_seconds(self):
@@ -246,14 +255,18 @@ class Results_sum(Page):
             'Question_1_pay_pre_s': self.player.Question_1_payoff_pre_s,
             'Question_2_pay_pre_s': self.player.Question_2_payoff_pre_s,
             'Question_3_pay_pre_s': self.player.Question_3_payoff_pre_s,
-            'profit': self.player.profit,
-            'asset_value': self.player.asset_value,
+#            'profit': self.player.profit,
+#            'asset_value': self.player.asset_value,
             'cash_flow': self.player.settled_cash,
             'payoff_from_survey': self.player.survey_avg_pay, 
-            'payoff_from_trading': self.player.payoff_from_trading,
-            'total_pay':self.player.total_payoff,
-            'shares': self.player.shares
+#            'payoff_from_trading': self.player.payoff_from_trading,
+#            'total_pay':self.player.total_payoff,
+            'shares': self.player.shares,
+            'contingent_trading_profit_G': self.player.contingent_trading_profit_G,
+            'contingent_trading_profit_B': self.player.contingent_trading_profit_B,
+            'contingent_total_payoff_G': self.player.contingent_total_payoff_G,
+            'contingent_total_payoff_B': self.player.contingent_total_payoff_B,
         }
 
 
-page_sequence = [grouping, Wait_for_trading, Pre_Trading_Survey_1,Pre_Trading_Survey_2, Wait_for_trading, Market, Post_Trading_Survey, Wait, Results_state, Results_trading, Results_survey, Results_total, Results_sum]
+page_sequence = [grouping, Wait_for_trading, Pre_Trading_Survey_1,Pre_Trading_Survey_2, Wait_for_trading, Market, Post_Trading_Survey, Wait, Results_trading, Results_survey, Results_total, Results_sum]

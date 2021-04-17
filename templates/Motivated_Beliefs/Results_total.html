@@ -35,17 +35,16 @@ th, td{
 <div class = "results-container">
 	<div class="total_pay">
 		<div class = "text-header">
-			<br>
-					Total payoff for this period: {{total_pay}}
-			</br>
+				<br>
+				Total Payoff for This Period = Trading Profit + Average of Payoffs From Survey
+				</br>
 		</div>
 		<div class = "text-results">
 				<br>
-				Total payoff for this period = payoff from trading + average of payoffs from survey
-				</br>
-				<br>
-				{{total_pay}} = {{payoff_from_trading}} + {{payoff_from_survey}}
-				</br>
+				If state is G, your total payoff = {{contingent_trading_profit_G}} + {{payoff_from_survey}} = {{contingent_total_payoff_G}}
+			    </br>
+			    <br>
+			    If state is B, your total payoff = {{contingent_trading_profit_B}} + {{payoff_from_survey}} = {{contingent_total_payoff_B}}
 		</div>
 	</div>
 </div>
