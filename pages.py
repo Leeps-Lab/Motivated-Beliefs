@@ -27,8 +27,8 @@ class Pre_Trading_Survey_1(Page):
             def before_next_page(self):
                 self.player.save()
 
-            img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
-            img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+            img_sig_url = '/static/Motivated_Beliefs/signal.PNG'.format(self.player.signal_nature)
+            img_url = '/static/Motivated_Beliefs/balls2/balls_{}.JPG'.format(self.player.signal1_black)
             if self.player.hi==1:
                 color = "Green"
                 hi = True
@@ -67,8 +67,8 @@ class Pre_Trading_Survey_2(Page):
             def before_next_page(self):
                 self.player.save()
     
-            img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
-            img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+            img_sig_url = '/static/Motivated_Beliefs/signal.PNG'.format(self.player.signal_nature)
+            img_url = '/static/Motivated_Beliefs/balls2/balls_{}.JPG'.format(self.player.signal1_black)
             if self.player.hi==1:
                 color = "Green"
                 hi = True
@@ -97,8 +97,8 @@ class Market(BaseMarketPage):
     
     def vars_for_template(self):
         
-        img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
-        img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+        img_sig_url = '/static/Motivated_Beliefs/signal.PNG'.format(self.player.signal_nature)
+        img_url = '/static/Motivated_Beliefs/balls2/balls_{}.JPG'.format(self.player.signal1_black)
 
         r_num = self.subsession.round_number 
         output = "Period Number"
@@ -144,8 +144,8 @@ class Post_Trading_Survey(BaseMarketPage):
             def before_next_page(self):
                 self.player.save()
 
-            img_sig_url = '/static/Motivated_Beliefs/signal.png'.format(self.player.signal_nature)
-            img_url = '/static/Motivated_Beliefs/balls2/balls_{}.jpg'.format(self.player.signal1_black)
+            img_sig_url = '/static/Motivated_Beliefs/signal.PNG'.format(self.player.signal_nature)
+            img_url = '/static/Motivated_Beliefs/balls2/balls_{}.JPG'.format(self.player.signal1_black)
             if self.player.hi==1:
                 color = "Green"
                 hi =True
