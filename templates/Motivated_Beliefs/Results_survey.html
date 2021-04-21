@@ -18,6 +18,7 @@ table{
 }
 th, td{
 	padding: 15px;
+	border: 1px solid black;
 }
 .text-results {
 	text-align: center;
@@ -39,6 +40,33 @@ th, td{
 {% block content %}
 <div class = "results-container">
 	<div class="survey">
+		<table>
+  <tr>
+  	<th>Survey Questions Numbers</th>
+    <th>Pre-trading Survey 1</th>
+    <th>Pre-trading Survey 2</th>
+    <th>Post-trading Survey </th>
+  </tr>
+  <tr>
+    <td>Question 1</td>
+    <td>{{Question_1_pay_pre_ns}}</td>
+    <td>{{Question_1_pay_pre_s}}</td>
+    <td>{{Question_1_pay_post}}</td>
+  </tr>
+  <tr>
+    <td>Question 2</td>
+    <td>{{Question_2_pay_pre_ns}}</td>
+    <td>{{Question_2_pay_pre_s}}</td>
+    <td>{{Question_2_pay_post}}</td>
+  </tr>
+  <tr>
+    <td>Question 3</td>
+    <td>{{Question_3_pay_pre_ns}}</td>
+    <td>{{Question_3_pay_pre_s}}</td>
+    <td>{{Question_3_pay_post}}</td>
+  </tr>
+</table>
+<!--
 				<table>
 						<tr>
 								<td class = "text-header">
@@ -97,6 +125,7 @@ th, td{
 							</td>
 						</tr>
 				</table>
+-->
 				<div class = "text-header">
 					<br>
 					The average payoff from survey questions:
