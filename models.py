@@ -113,8 +113,7 @@ class Subsession(markets_models.Subsession):
     ### treat, player
     #######################################################################
     def set_colors(self,treat,state):
-        random_colors_control = self.get_player_colors()
-        random_colors_control = self.get_player_colors_con()
+        random_colors_control = self.get_player_colors(treat)
         i=0
         for p in self.get_players():
             if treat == 1:  
@@ -123,12 +122,13 @@ class Subsession(markets_models.Subsession):
                 p.hi = random_colors_control[i]
             i=i+1
     ######################################################################
-    def get_player_colors(self):
-        return [self.config.rank_1_hi_treat,self.config.rank_2_hi_treat, self.config.rank_3_hi_treat, self.config.rank_4_hi_treat, 
-                self.config.rank_5_hi_treat, self.config.rank_6_hi_treat,self.config.rank_7_hi_treat, self.config.rank_8_hi_treat]
-    def get_player_colors_con(self):
-        return [self.config.rank_1_hi_con,self.config.rank_2_hi_con, self.config.rank_3_hi_con, self.config.rank_4_hi_con, 
-                self.config.rank_5_hi_con, self.config.rank_6_hi_con,self.config.rank_7_hi_con, self.config.rank_8_hi_con]
+    def get_player_colors(self,treat):
+        if treat ==1 
+            return [self.config.rank_1_hi_treat,self.config.rank_2_hi_treat, self.config.rank_3_hi_treat, self.config.rank_4_hi_treat, 
+                    self.config.rank_5_hi_treat, self.config.rank_6_hi_treat,self.config.rank_7_hi_treat, self.config.rank_8_hi_treat]
+        else:
+            return [self.config.rank_1_hi_con,self.config.rank_2_hi_con, self.config.rank_3_hi_con, self.config.rank_4_hi_con, 
+                    self.config.rank_5_hi_con, self.config.rank_6_hi_con,self.config.rank_7_hi_con, self.config.rank_8_hi_con]
     #######################################################################
     ### creates an array of rank private signals  
     ### 
