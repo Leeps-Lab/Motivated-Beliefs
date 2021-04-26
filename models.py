@@ -123,7 +123,7 @@ class Subsession(markets_models.Subsession):
             i=i+1
     ######################################################################
     def get_player_colors(self,treat):
-        if treat ==1 
+        if treat ==1:
             return [self.config.rank_1_hi_treat,self.config.rank_2_hi_treat, self.config.rank_3_hi_treat, self.config.rank_4_hi_treat, 
                     self.config.rank_5_hi_treat, self.config.rank_6_hi_treat,self.config.rank_7_hi_treat, self.config.rank_8_hi_treat]
         else:
