@@ -242,9 +242,9 @@ class Group(markets_models.Group):
         super()._on_enter_event(event)
 
     def _on_accept_event(self, event):
-        enter_msg = event.value
-        if self.get_player(enter_msg['pcode']).settled_assets['A'] >= 8:
-            self._send_error(enter_msg['pcode'], 'you are holding too many assets')
+        accepted_order = event.value
+        if not accepted_order['is_bid'] and self.get_player(event.participant.code).settled_assets['A'] >= 8:
+            self._send_error(event.participant.code, 'you are holding too many assets')
             return
 
         super()._on_accept_event(event)

@@ -6,7 +6,14 @@ import '/static/otree-redwood/src/otree-constants/otree-constants.js';
 
 class ColoredTradeList extends TradeList{
 
-
+    static get properties(){
+        return {
+            sorttrades: {
+                type: Boolean, 
+                value: false, 
+            }
+        };
+    }
 	static get template() {
         return html`
             <style>
@@ -37,7 +44,7 @@ class ColoredTradeList extends TradeList{
             ></otree-constants>
 
             <div id="container">
-                <template is="dom-repeat" items="{{trades}}" as="trade" filter="{{_getAssetFilterFunc(assetName)}}">
+                <template is="dom-repeat" items="{{dotradesort(trades.*, sorttrades)}}" as="trade" filter="{{_getAssetFilterFunc(assetName)}}">
                     <template is="dom-repeat" items="{{trade.making_orders}}" as="making_order">
                         <div class$="[[_getTradeClass(trade)]]">
                             <span>[[displayFormat(making_order, trade.taking_order)]]</span>
@@ -77,5 +84,16 @@ class ColoredTradeList extends TradeList{
                 return "other-trade";
             }
         }
+    dotradesort(trades_change, sorttrades){
+        let trades = trades_change.base
+        if (trades===undefined) {
+            return
+        }
+        trades = trades.slice()
+        if (sorttrades){
+            trades = trades.sort((a,b)=>(a.making_orders[0].price-b.making_orders[0].price))
+        }
+        return trades
+    }
  }
  window.customElements.define('colored-trade-list', ColoredTradeList);

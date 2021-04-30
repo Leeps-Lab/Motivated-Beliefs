@@ -65,15 +65,13 @@ class TradeView extends PolymerElement {
                 available-assets="{{availableAssets}}"
                 settled-cash = "{{settledCash}}"
                 available-cash="{{availableCash}}"
-                on-confirm-trade="_confirm_trade"
-                on-confirm-cancel="_confirm_cancel"
-                on-error="_handle_error"
             ></trader-state>
             <div class="container" id="main-container">
                     <colored-trade-list
                         class="flex-fill"
                         display-format="[[ tradeFormatter ]]"
                         trades="[[trades]]"
+                        sorttrades
                     ></colored-trade-list>
             </div>
         `;

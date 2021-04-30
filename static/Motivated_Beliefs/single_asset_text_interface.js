@@ -97,7 +97,6 @@ class SingleAssetTextInterface extends PolymerElement {
                 available-assets="{{availableAssets}}"
                 settled-cash = "{{settledCash}}"
                 available-cash="{{availableCash}}"
-                on-confirm-trade="_confirm_trade"
                 on-confirm-cancel="_confirm_cancel"
                 on-error="_handle_error"
             ></trader-state>
