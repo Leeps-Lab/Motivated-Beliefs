@@ -44,7 +44,8 @@ class Overconfidence_Output_Gen(BaseCSVMarketOutputGenerator):
                 'contingent_trading_profit_G', 
                 'contingent_trading_profit_B', 
                 'contingent_total_payoff_G',
-                'contingent_total_payoff_B'
+                'contingent_total_payoff_B',
+                'Color'
     			]
 
 	def get_group_output(self, group):
@@ -56,8 +57,8 @@ class Overconfidence_Output_Gen(BaseCSVMarketOutputGenerator):
 				group.id_in_subsession,
 				player.id_in_group,
 				player.participant.code,
-				player.iqranking, 
                 player.pranking, 
+				player.iqranking, 
     			player.profit, 
     			player.total_payoff, 
     			player.world_state,
@@ -94,7 +95,8 @@ class Overconfidence_Output_Gen(BaseCSVMarketOutputGenerator):
                 player.contingent_trading_profit_G, 
                 player.contingent_trading_profit_B, 
                 player.contingent_total_payoff_G,
-                player.contingent_total_payoff_B
+                player.contingent_total_payoff_B,
+                player.hi
 			]
 
 output_generators = [DefaultJSONMarketOutputGenerator, Overconfidence_Output_Gen]

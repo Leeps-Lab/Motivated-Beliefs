@@ -97,6 +97,7 @@ class Subsession(markets_models.Subsession):
     def set_player_id(self):
         for player in self.get_players():
             player.iqranking = player.participant.vars['ranking']
+            print(player.iqranking)
     #######################################################################
     ### sets the players signals 
     ### treat, player
@@ -113,14 +114,11 @@ class Subsession(markets_models.Subsession):
     ### treat, player
     #######################################################################
     def set_colors(self,treat,state):
-        random_colors_control = self.get_player_colors(treat)
+        random_colors = self.get_player_colors(treat)
         i=0
         for p in self.get_players():
-            if treat == 1:  
-                p.hi = random_colors_control[i]
-            else:
-                p.hi = random_colors_control[i]
-            i=i+1
+            i=p.iqranking-1
+            p.hi = random_colors[i]
     ######################################################################
     def get_player_colors(self,treat):
         if treat ==1:
