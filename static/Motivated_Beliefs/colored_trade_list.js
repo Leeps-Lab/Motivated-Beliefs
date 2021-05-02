@@ -91,7 +91,7 @@ class ColoredTradeList extends TradeList{
         }
         trades = trades.slice()
         if (sorttrades){
-            trades = trades.sort((a,b)=>(a.making_orders[0].price-b.making_orders[0].price))
+            trades = trades.sort((a,b)=>(b.making_orders[0].price-a.making_orders[0].price))
         }
         return trades
     }
