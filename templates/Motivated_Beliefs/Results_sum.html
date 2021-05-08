@@ -46,22 +46,34 @@ th, td{
 	text-align: center;
 	font-family: verdana;
 }
+div.wrapper {
+  font-size: 110%;
+  text-align: center;
+  position: relative;
+  border: 2px solid cornflowerblue;
+  margin-top: 20px;
+  padding: 10px 10px 10px;
+}
+div.wrapper label {
+  color: white;
+  line-height: 30px;
+  padding: 0 5px;
+  position: absolute;
+  background-color: cornflowerblue;
+  /* Adjust these values to posiytion the title or label */
+  top: -10px;
+  left: 10px;
+}
+
 </style>
 
 {% endblock %}
-{% block content %}
-	<div class = "results-container">
-		<div class = "state">
-			<div class = "text-header">
-				<br>
-					You Own <b>{{shares}}</b> Shares at The End of The Period. 
-				</br>
-			</div>
-		</div>
-	</div>
+
+	<!--
 	<div class="results-container">	
 		<div class="questions">
 			<div class="survey">
+				
 						<table>
                               <tr>
   	                             <th>Survey Questions Numbers</th>
@@ -88,7 +100,8 @@ th, td{
                                  <td>{{Question_3_pay_post}}</td>
                               </tr>
                         </table>
-<!--
+                
+
 				<table>
 						<tr>
 								<td class = "text-header">
@@ -147,47 +160,58 @@ th, td{
 							</td>
 						</tr>
 				</table>
--->
+
 			</div>
-			<div class="avg">
-				<div class = "text-header">
-					<br>
-					The Average Payoff From Survey Questions:
-					</br>
-				</div>
-				<div class = "text-results">
-					<br>
-					(1/9)({{Question_1_pay_pre_ns}} + {{Question_2_pay_pre_ns}} + {{Question_3_pay_pre_ns}} + {{Question_1_pay_pre_s}} + {{Question_2_pay_pre_s}} + {{Question_3_pay_pre_s}}+{{Question_1_pay_post}} + {{Question_2_pay_post}} + {{Question_3_pay_post}}) = {{payoff_from_survey}}
-					</br>
-				</div>
-			</div>
+
 	</div>
-	<div class = "payoffs">
-			<div class = "text-header">
+-->
+{% block content %}
+
+<!--	<div class = "results-container">  -->
+		<div class="wrapper">
+			<label>Trading Result</label>
 				<br>
+					You Own <b>{{shares}}</b> Shares at The End of The Period. 
+				</br>
+			    <br>
 				Trading Profit = Net Cash + Asset Value * Number of Held assets
 				</br>
-			</div>
-			<div class = "text-results">
 				<br>
 				    If State is G, Your Trading Profit = {{cash_flow}} + {{shares}}*600 = {{contingent_trading_profit_G}}
 			    </br>
 			    <br>
 			        If State is B, Your Trading Profit = {{cash_flow}} + {{shares}}*400 = {{contingent_trading_profit_B}}
 				</br>
-			</div>
-			<div class = "text-header">
+		</div>
+<!--	</div> -->
+   
+<!-- 	<div class="avg"> -->
+	<div class = "wrapper">
+        <label>Survey Result</label>
+					<br>
+					The Average Payoff From Survey Questions: {{payoff_from_survey}}
+					</br>
+		
+	</div>
+<!--	</div>  -->
+				<!--
+				<div class = "text-results">
+					<br>
+					(1/9)({{Question_1_pay_pre_ns}} + {{Question_2_pay_pre_ns}} + {{Question_3_pay_pre_ns}} + {{Question_1_pay_pre_s}} + {{Question_2_pay_pre_s}} + {{Question_3_pay_pre_s}}+{{Question_1_pay_post}} + {{Question_2_pay_post}} + {{Question_3_pay_post}}) = {{payoff_from_survey}}
+					</br>
+				</div>
+			-->
+			
+	<div class = "wrapper">
+			 <label>Total Payoff</label>
 				<br>
 					Total Payoff for This Period = Trading Profit + Average of Payoffs From Survey
 				</br>
-			</div>
-			<div class = "text-results">
+		
 				<br>
 				If State is G, Your Total Payoff = {{contingent_trading_profit_G}} + {{payoff_from_survey}} = {{contingent_total_payoff_G}}
 			    </br>
 			    <br>
 			    If State is B, Your Total Payoff = {{contingent_trading_profit_B}} + {{payoff_from_survey}} = {{contingent_total_payoff_B}}
-			</div>
-	</div>
-</div>
+ </div>
 {% endblock %}

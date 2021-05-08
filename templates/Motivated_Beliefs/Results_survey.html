@@ -40,6 +40,7 @@ th, td{
 {% block content %}
 <div class = "results-container">
 	<div class="survey">
+<!--
 		<table>
   <tr>
   	<th>Survey Questions Numbers</th>
@@ -66,6 +67,7 @@ th, td{
     <td>{{Question_3_pay_post}}</td>
   </tr>
 </table>
+-->
 <!--
 				<table>
 						<tr>
@@ -128,14 +130,16 @@ th, td{
 -->
 				<div class = "text-header">
 					<br>
-					The Average Payoff from Survey Questions:
+					The Average Payoff from Survey Questions: {{payoff_from_survey}}
 					</br>
 				</div>
+				<!--
 				<div class = "text-results">
 					<br>
 					(1/9)({{Question_1_pay_pre_ns}} + {{Question_2_pay_pre_ns}} + {{Question_3_pay_pre_ns}} + {{Question_1_pay_pre_s}} + {{Question_2_pay_pre_s}} + {{Question_3_pay_pre_s}}+{{Question_1_pay_post}} + {{Question_2_pay_post}} + {{Question_3_pay_post}}) = {{payoff_from_survey}}
 					</br>
 				</div>
+			-->
 			</div>
 		</div>
 {% next_button %}
