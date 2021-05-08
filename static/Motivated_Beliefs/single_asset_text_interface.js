@@ -24,6 +24,7 @@ class SingleAssetTextInterface extends PolymerElement {
             availableAssets: Number,
             settledCash: Number,
             availableCash: Number,
+            timeRemaining: Number,
         };
     }
 
@@ -75,7 +76,11 @@ class SingleAssetTextInterface extends PolymerElement {
                 #allocation {
                     align-self: center;
                     text-align: center; 
-                }   
+                } 
+                #timer{
+                   align-self: center;
+                   text-align: center;  
+                }
                 #order-input > div {
                     border: 1px solid black;
                     padding: 5px;
@@ -97,9 +102,13 @@ class SingleAssetTextInterface extends PolymerElement {
                 available-assets="{{availableAssets}}"
                 settled-cash = "{{settledCash}}"
                 available-cash="{{availableCash}}"
+                time-remaining= "{{timeRemaining}}"
                 on-confirm-cancel="_confirm_cancel"
                 on-error="_handle_error"
             ></trader-state>
+            <div id = "timer"> 
+            Time Remaining: {{timeRemaining}} Seconds
+             </div>
             <div id="allocation">
                     <div>
                         <h4>Your Allocation</h4>

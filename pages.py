@@ -92,8 +92,8 @@ class Pre_Trading_Survey_2(Page):
 
 
 class Market(BaseMarketPage): 
-    def get_timeout_seconds(self):
-        return self.group.get_remaining_time()
+    #def get_timeout_seconds(self):
+     #   return self.group.get_remaining_time()
     
     def vars_for_template(self):
         
