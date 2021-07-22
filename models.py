@@ -13,7 +13,7 @@ import math
 class Constants(BaseConstants):
     name_in_url = 'Motivated_Beliefs'
     players_per_group = None
-    num_rounds = 16
+    num_rounds = 10
     # the columns of the config CSV and their types
     # this dict is used by ConfigManager
     config_fields = {
