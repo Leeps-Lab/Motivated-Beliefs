@@ -172,21 +172,6 @@ class Wait(WaitPage):
     
     after_all_players_arrive = 'set_payoffs'
 
-"""    
-class Results_state(Page):
-    def get_timeout_seconds(self):
-        return 8
-    def vars_for_template(self): 
-        if self.player.world_state==1:
-            state="G"
-        elif self.player.world_state==0:
-            state="B"
-
-        return {
-        'shares': self.player.shares,
-        'state': state,
-        }
-"""
 class Results_trading(Page):
     def get_timeout_seconds(self):
         return 15

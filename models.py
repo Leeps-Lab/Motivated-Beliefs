@@ -74,7 +74,10 @@ class Subsession(markets_models.Subsession):
         if self.round_number > self.config.num_rounds:
             return
         return super().creating_session()
-
+    ######################################################################
+    ## groups players based on IQ test scores 
+    ##
+    ######################################################################
     def grouping(self):
         self.set_player_id()
         self.set_balls_signal(self.config.treat)
@@ -119,7 +122,10 @@ class Subsession(markets_models.Subsession):
         for p in self.get_players():
             i=p.iqranking-1
             p.hi = random_colors[i]
-    ######################################################################
+    #######################################################################
+    ### creates an array of colors for players based on their rank 
+    ### 
+    #######################################################################
     def get_player_colors(self,treat):
         if treat ==1:
             return [self.config.rank_1_hi_treat,self.config.rank_2_hi_treat, self.config.rank_3_hi_treat, self.config.rank_4_hi_treat, 
@@ -128,7 +134,7 @@ class Subsession(markets_models.Subsession):
             return [self.config.rank_1_hi_con,self.config.rank_2_hi_con, self.config.rank_3_hi_con, self.config.rank_4_hi_con, 
                     self.config.rank_5_hi_con, self.config.rank_6_hi_con,self.config.rank_7_hi_con, self.config.rank_8_hi_con]
     #######################################################################
-    ### creates an array of rank private signals  
+    ### creates an array of private signals for players based on their rank 
     ### 
     #######################################################################
     def get_bb_array(self, treat):
@@ -376,7 +382,6 @@ class Player(markets_models.Player):
     Question_2_payoff_post = models.IntegerField(initial=0)
     Question_3_payoff_post = models.IntegerField(initial=0)
     survey_avg_pay = models.IntegerField()
-    profit = models.IntegerField()
     asset_value = models.IntegerField()
     payoff_from_trading = models.IntegerField()
     shares = models.IntegerField()
