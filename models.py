@@ -343,10 +343,8 @@ class Player(markets_models.Player):
     asset_value = models.IntegerField()
     payoff_from_trading = models.IntegerField()
     shares = models.IntegerField()
-    average_payoff = models.IntegerField()
     hi = models.IntegerField()
-    color = models.IntegerField()
-    pair = models.IntegerField()
+    #color = models.IntegerField()
 ## Questions
     Question_1_pre_ns = models.StringField(
         label='''
