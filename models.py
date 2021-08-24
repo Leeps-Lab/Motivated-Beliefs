@@ -135,7 +135,7 @@ class Subsession(markets_models.Subsession):
                     self.config.rank_5_hi_con, self.config.rank_6_hi_con,self.config.rank_7_hi_con, self.config.rank_8_hi_con]
     #######################################################################
     ### creates an array of private signals for players based on their rank 
-    ### 
+    ### returns an array with private singals 
     #######################################################################
     def get_bb_array(self, treat):
         if treat==1:
@@ -309,48 +309,6 @@ class Group(markets_models.Group):
 
 class Player(markets_models.Player):
 
-    current_bid = models.ForeignKey(Order, null=True, on_delete=models.CASCADE, related_name="+")
-    current_ask = models.ForeignKey(Order, null=True, on_delete=models.CASCADE, related_name="+")
-
-    def check_available(self, is_bid, price, volume, asset_name):
-        '''instead of checking available assets, just check settled assets since there can
-        only ever be one bid/ask on the market from each player
-        '''
-        if not is_bid and self.settled_assets[asset_name] < volume:
-            return False
-        return True
-       
-    def update_holdings_trade(self, price, volume, is_bid, asset_name):
-        if is_bid:
-            self.settled_cash -= price * volume
-
-            self.available_assets[asset_name] += volume
-            self.settled_assets[asset_name] += volume
-        else:
-            self.settled_cash += price * volume
-
-            self.available_assets[asset_name] -= volume
-            self.settled_assets[asset_name] -= volume
-
-    def asset_endowment(self):
-        return self.subsession.config.asset_endowment
-    
-    def cash_endowment(self):
-        return self.subsession.config.cash_endowment
-
-    def update_holdings_available(self, order, removed):
-        sign = 1 if removed else -1
-        if not order.is_bid:
-            self.available_assets[order.exchange.asset_name] += order.volume * sign
-            
-
-## Bayes methods
-    def BU_low(self, k, m ):
-        return (math.pow(0.6,k) + math.pow(.4,m))/((math.pow(.6,k) + math.pow(.4,m)) +(math.pow(.4,k) + math.pow(.6,m)))
-    def BU_hi(self, k, m ):
-        return (math.pow(0.8,k) + math.pow(.2,m))/((math.pow(.8,k) + math.pow(.2,m)) +(math.pow(.2,k) + math.pow(.8,m)))
-    def BU_env_b(self, l, h ):
-        return (((math.pow(0.6,l) * math.pow(.4,8-l))*(math.pow(.8,h)*math.pow(.2,8-h)))/(((math.pow(.6,l)*math.pow(.4,8-l)*math.pow(.8,h)*math.pow(.2,8-h)) +(math.pow(.4,l)*math.pow(.6,8-l)*math.pow(.2,h)*math.pow(.8,8-h)))))
 ## defined Variables 
     pranking = models.IntegerField()
     iqranking = models.IntegerField()
@@ -389,7 +347,7 @@ class Player(markets_models.Player):
     hi = models.IntegerField()
     color = models.IntegerField()
     pair = models.IntegerField()
-## Questions Pre
+## Questions
     Question_1_pre_ns = models.StringField(
         label='''
         Your answer:'''
@@ -432,6 +390,41 @@ class Player(markets_models.Player):
          Please choose one of the following (1 means top, 8 means bottom)
         '''
     )
+    ###################### overwritten methods##################################
+    current_bid = models.ForeignKey(Order, null=True, on_delete=models.CASCADE, related_name="+")
+    current_ask = models.ForeignKey(Order, null=True, on_delete=models.CASCADE, related_name="+")
+
+    def check_available(self, is_bid, price, volume, asset_name):
+        '''instead of checking available assets, just check settled assets since there can
+        only ever be one bid/ask on the market from each player
+        '''
+        if not is_bid and self.settled_assets[asset_name] < volume:
+            return False
+        return True
+       
+    def update_holdings_trade(self, price, volume, is_bid, asset_name):
+        if is_bid:
+            self.settled_cash -= price * volume
+
+            self.available_assets[asset_name] += volume
+            self.settled_assets[asset_name] += volume
+        else:
+            self.settled_cash += price * volume
+
+            self.available_assets[asset_name] -= volume
+            self.settled_assets[asset_name] -= volume
+
+    def asset_endowment(self):
+        return self.subsession.config.asset_endowment
+    
+    def cash_endowment(self):
+        return self.subsession.config.cash_endowment
+
+    def update_holdings_available(self, order, removed):
+        sign = 1 if removed else -1
+        if not order.is_bid:
+            self.available_assets[order.exchange.asset_name] += order.volume * sign
+
     #######################################################################
     ### sets the proft for an indivdual player 
     #######################################################################
@@ -448,8 +441,6 @@ class Player(markets_models.Player):
         else:
             self.asset_value = self.shares*400
             self.profit =  self.asset_value + self.settled_cash
-
-         
     #######################################################################
     ### sets the proft for an indivdual player 
     #######################################################################
