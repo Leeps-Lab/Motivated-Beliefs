@@ -27,7 +27,6 @@ class Pre_Trading_Survey_1(Page):
             def before_next_page(self):
                 self.player.save()
 
-            img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
             img_url = '/static/Motivated_Beliefs/Balls2/balls_{}.jpg'.format(self.player.signal1_black)
             if self.player.hi==1:
                 color = "Green"
@@ -38,13 +37,21 @@ class Pre_Trading_Survey_1(Page):
             else:
                 color = None
 
+            if self.player.te==2:
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
+                divident_range = "(between 0 and 1000)"
+            else: 
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                divident_range = "(between 400 and 600)"
+            
             return {
                 'signal1black': self.player.signal1_black,
                 'signal1white': self.player.signal1_white,
                 'img_url': img_url,
                 'img_sig_url': img_sig_url,
                 'color':color,
-                'hi': hi
+                'hi': hi,
+                'divident_range': divident_range
             }
     form_model = 'player'
     form_fields = ['Question_1_pre_ns', 'Question_2_pre_ns', 'Question_3_pre_ns']
@@ -66,8 +73,7 @@ class Pre_Trading_Survey_2(Page):
     def vars_for_template(self):
             def before_next_page(self):
                 self.player.save()
-    
-            img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
+            
             img_url = '/static/Motivated_Beliefs/Balls2/balls_{}.jpg'.format(self.player.signal1_black)
             if self.player.hi==1:
                 color = "Green"
@@ -77,14 +83,22 @@ class Pre_Trading_Survey_2(Page):
                 hi = False
             else:
                 color = None
-
+            
+            if self.player.te==2:
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
+                divident_range = "(between 0 and 1000)"
+            else: 
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                divident_range = "(between 400 and 600)"
+            
             return {
                 'signal1black': self.player.signal1_black,
                 'signal1white': self.player.signal1_white,
                 'img_url': img_url,
                 'img_sig_url': img_sig_url,
                 'color':color,
-                'hi': hi
+                'hi': hi,
+                'divident_range': divident_range
             }
 
     form_model = 'player'
@@ -97,7 +111,7 @@ class Market(BaseMarketPage):
     
     def vars_for_template(self):
         
-        img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
+        # img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
         img_url = '/static/Motivated_Beliefs/Balls2/balls_{}.jpg'.format(self.player.signal1_black)
 
         r_num = self.subsession.round_number 
@@ -115,6 +129,13 @@ class Market(BaseMarketPage):
         else:
             color = None
 
+        if self.player.te==2:
+            img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
+            divident_range = "(between 0 and 1000)"
+        else: 
+            img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+            divident_range = "(between 400 and 600)"
+
         return {
             'round_num_display_string': output, 
             'round_num':r_num,
@@ -123,7 +144,8 @@ class Market(BaseMarketPage):
             'img_url': img_url,
             'color': color,
             'img_sig_url': img_sig_url,
-            'hi':hi
+            'hi':hi,
+            'divident_range': divident_range
         }
 class Post_Trading_Survey(BaseMarketPage):
     def get_timeout_seconds(self):
@@ -144,7 +166,6 @@ class Post_Trading_Survey(BaseMarketPage):
             def before_next_page(self):
                 self.player.save()
 
-            img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
             img_url = '/static/Motivated_Beliefs/Balls2/balls_{}.jpg'.format(self.player.signal1_black)
             if self.player.hi==1:
                 color = "Green"
@@ -155,13 +176,21 @@ class Post_Trading_Survey(BaseMarketPage):
             else:
                 color = None
 
+            if self.player.te==2:
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
+                divident_range = "(between 0 and 1000)"
+            else: 
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                divident_range = "(between 400 and 600)"
+
             return {
                 'signal1black': self.player.signal1_black,
                 'signal1white': self.player.signal1_white,
                 'img_url': img_url,
                 'color': color,
                 'img_sig_url': img_sig_url,
-                'hi':hi
+                'hi':hi,
+                'divident_range': divident_range
             }
 
     form_model = 'player'

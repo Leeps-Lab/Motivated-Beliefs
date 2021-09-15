@@ -9,6 +9,20 @@ import random
 import itertools
 import numpy as np
 import math
+import os 
+import pathlib
+import csv
+
+
+# print(pathlib.Path(__file__).parent.resolve())
+with open (os.path.join(pathlib.Path(__file__).parent.resolve(), 'configs/demo.csv')) as f:
+    reader = csv.reader(f)
+    Treat_list = []
+    for row in reader: 
+        Treat_list.append(row[13])
+globalTreat = Treat_list[1]   
+# print(globalTreat)
+
 
 class Constants(BaseConstants):
     name_in_url = 'Motivated_Beliefs'
@@ -127,7 +141,7 @@ class Subsession(markets_models.Subsession):
     ### 
     #######################################################################
     def get_player_colors(self,treat):
-        if treat ==1:
+        if treat ==1 or treat == 2:
             return [self.config.rank_1_hi_treat,self.config.rank_2_hi_treat, self.config.rank_3_hi_treat, self.config.rank_4_hi_treat, 
                     self.config.rank_5_hi_treat, self.config.rank_6_hi_treat,self.config.rank_7_hi_treat, self.config.rank_8_hi_treat]
         else:
@@ -138,7 +152,7 @@ class Subsession(markets_models.Subsession):
     ### returns an array with private singals 
     #######################################################################
     def get_bb_array(self, treat):
-        if treat==1:
+        if treat==1 or treat == 2:
             return [self.config.rank_1_treat,self.config.rank_2_treat, self.config.rank_3_treat, self.config.rank_4_treat, 
                     self.config.rank_5_treat, self.config.rank_6_treat,self.config.rank_7_treat, self.config.rank_8_treat]
         else:
@@ -241,6 +255,20 @@ class Group(markets_models.Group):
             self._send_error(enter_msg['pcode'], 'You’ve hit the maximum amount of assets you can hold')
             return
         
+        if globalTreat == '2': 
+            # means Intense 2
+            # min and max are 0 and 1000 
+            min = 0
+            max = 1000
+        else: 
+            # Control or N-Treatment 
+            min = 400
+            max = 600
+        
+        if enter_msg['price'] < min or enter_msg['price'] > max: 
+            self._send_error(enter_msg['pcode'], 'Invalid price entered')
+            return 
+
         super()._on_enter_event(event)
 
     def _on_accept_event(self, event):
@@ -306,6 +334,18 @@ class Group(markets_models.Group):
 
         super().confirm_cancel(order)
     
+if globalTreat == '2': 
+    # means Intense 2
+    # min and max are 0 and 1000 
+    min_l = 0
+    max_l = 1000
+else: 
+    # Control or N-Treatment 
+    min_l = 400
+    max_l = 600
+label_custom = 'Enter a number between ' + str(min_l) + ' and ' + str(max_l)
+# print(label_custom)
+# print(type(globalTreat))
 
 class Player(markets_models.Player):
 
@@ -345,6 +385,7 @@ class Player(markets_models.Player):
     shares = models.IntegerField()
     hi = models.IntegerField()
     #color = models.IntegerField()
+    te = models.IntegerField(initial= globalTreat)
 ## Questions
     Question_1_pre_ns = models.StringField(
         label='''
@@ -357,19 +398,23 @@ class Player(markets_models.Player):
     Question_1_post = models.StringField(
         label='''
         Your answer:'''
+    )  
+
+    ###########################
+    ##### EDIT THIS
+    
+    Question_2_pre_ns = models.IntegerField(min=min_l, max=max_l,
+        label=label_custom
     )
-    Question_2_pre_ns = models.IntegerField(min=400, max=600,
-        label='''
-        Enter a number between 400 and 600.'''
+    ##### EDIT THIS 
+    Question_2_pre_s = models.IntegerField(min=min_l, max=max_l,
+        label=label_custom
     )
-    Question_2_pre_s = models.IntegerField(min=400, max=600,
-        label='''
-        Enter a number between 400 and 600.'''
-    )
-    Question_2_post = models.IntegerField(min=400, max=600,
-        label='''
-        Enter a number between 400 and 600.'''
-    )
+    ##### EDIT THIS 
+    Question_2_post = models.IntegerField(min=min_l, max=max_l,
+        label=label_custom
+    )       
+    ###########################
     Question_3_pre_ns = models.IntegerField(
         choices=[1,2,3,4,5,6,7,8],
         label='''
