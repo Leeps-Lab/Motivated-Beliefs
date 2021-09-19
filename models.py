@@ -13,7 +13,6 @@ import os
 import pathlib
 import csv
 
-
 # print(pathlib.Path(__file__).parent.resolve())
 with open (os.path.join(pathlib.Path(__file__).parent.resolve(), 'configs/demo.csv')) as f:
     reader = csv.reader(f)

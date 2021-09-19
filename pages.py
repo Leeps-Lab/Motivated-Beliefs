@@ -38,11 +38,31 @@ class Pre_Trading_Survey_1(Page):
                 color = None
 
             if self.player.te==2:
+                # for Intense 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
                 divident_range = "(between 0 and 1000)"
-            else: 
+                group_assignment = [
+                'The Computer assigned you into group', 
+                'H if your IQ rank is higher than your paired player', 
+                'L if your IQ rank is lower than your paired player'
+                ]
+            elif self.player.te == 1: 
+                # for Treatment 1 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
                 divident_range = "(between 400 and 600)"
+                group_assignment = [
+                'The Computer assigned you into group', 
+                'H if your IQ rank is higher than your paired player', 
+                'L if your IQ rank is lower than your paired player'
+                ]
+            else: 
+                # for control 0 
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                divident_range = "(between 400 and 600)"
+                group_assignment = [
+                'The Computer assigned you into group',
+                'H or L by random.'
+                ]
             
             return {
                 'signal1black': self.player.signal1_black,
@@ -51,7 +71,8 @@ class Pre_Trading_Survey_1(Page):
                 'img_sig_url': img_sig_url,
                 'color':color,
                 'hi': hi,
-                'divident_range': divident_range
+                'divident_range': divident_range,
+                'group_assignment': group_assignment
             }
     form_model = 'player'
     form_fields = ['Question_1_pre_ns', 'Question_2_pre_ns', 'Question_3_pre_ns']
@@ -85,11 +106,31 @@ class Pre_Trading_Survey_2(Page):
                 color = None
             
             if self.player.te==2:
+                # for Intense 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
                 divident_range = "(between 0 and 1000)"
-            else: 
+                group_assignment = [
+                'The Computer assigned you into group', 
+                'H if your IQ rank is higher than your paired player', 
+                'L if your IQ rank is lower than your paired player'
+                ]
+            elif self.player.te == 1: 
+                # for Treatment 1 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
                 divident_range = "(between 400 and 600)"
+                group_assignment = [
+                'The Computer assigned you into group', 
+                'H if your IQ rank is higher than your paired player', 
+                'L if your IQ rank is lower than your paired player'
+                ]
+            else: 
+                # for control 0 
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                divident_range = "(between 400 and 600)"
+                group_assignment = [
+                'The Computer assigned you into group',
+                'H or L by random.'
+                ]
             
             return {
                 'signal1black': self.player.signal1_black,
@@ -98,7 +139,8 @@ class Pre_Trading_Survey_2(Page):
                 'img_sig_url': img_sig_url,
                 'color':color,
                 'hi': hi,
-                'divident_range': divident_range
+                'divident_range': divident_range,
+                'group_assignment': group_assignment
             }
 
     form_model = 'player'
@@ -130,11 +172,31 @@ class Market(BaseMarketPage):
             color = None
 
         if self.player.te==2:
-            img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
-            divident_range = "(between 0 and 1000)"
-        else: 
+                # for Intense 
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
+                divident_range = "(between 0 and 1000)"
+                group_assignment = [
+                'The Computer assigned you into group', 
+                'H if your IQ rank is higher than your paired player', 
+                'L if your IQ rank is lower than your paired player'
+                ]
+        elif self.player.te == 1: 
+            # for Treatment 1 
             img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
             divident_range = "(between 400 and 600)"
+            group_assignment = [
+            'The Computer assigned you into group', 
+            'H if your IQ rank is higher than your paired player', 
+            'L if your IQ rank is lower than your paired player'
+            ]
+        else: 
+            # for control 0 
+            img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+            divident_range = "(between 400 and 600)"
+            group_assignment = [
+            'The Computer assigned you into group',
+            'H or L by random.'
+            ]
 
         return {
             'round_num_display_string': output, 
@@ -145,8 +207,11 @@ class Market(BaseMarketPage):
             'color': color,
             'img_sig_url': img_sig_url,
             'hi':hi,
-            'divident_range': divident_range
+            'divident_range': divident_range,
+            'group_assignment': group_assignment
         }
+
+        
 class Post_Trading_Survey(BaseMarketPage):
     def get_timeout_seconds(self):
         return 60
@@ -177,20 +242,41 @@ class Post_Trading_Survey(BaseMarketPage):
                 color = None
 
             if self.player.te==2:
+                # for Intense 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
                 divident_range = "(between 0 and 1000)"
-            else: 
+                group_assignment = [
+                'The Computer assigned you into group', 
+                'H if your IQ rank is higher than your paired player', 
+                'L if your IQ rank is lower than your paired player'
+                ]
+            elif self.player.te == 1: 
+                # for Treatment 1 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
                 divident_range = "(between 400 and 600)"
-
+                group_assignment = [
+                'The Computer assigned you into group', 
+                'H if your IQ rank is higher than your paired player', 
+                'L if your IQ rank is lower than your paired player'
+                ]
+            else: 
+                # for control 0 
+                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                divident_range = "(between 400 and 600)"
+                group_assignment = [
+                'The Computer assigned you into group',
+                'H or L by random.'
+                ]
+            
             return {
                 'signal1black': self.player.signal1_black,
                 'signal1white': self.player.signal1_white,
                 'img_url': img_url,
-                'color': color,
                 'img_sig_url': img_sig_url,
-                'hi':hi,
-                'divident_range': divident_range
+                'color':color,
+                'hi': hi,
+                'divident_range': divident_range,
+                'group_assignment': group_assignment
             }
 
     form_model = 'player'
