@@ -398,18 +398,13 @@ class Player(markets_models.Player):
         label='''
         Your answer:'''
     )  
-
-    ###########################
-    ##### EDIT THIS
-    
+    ##### Maybe:  Change field type 
     Question_2_pre_ns = models.IntegerField(min=min_l, max=max_l,
         label=label_custom
     )
-    ##### EDIT THIS 
     Question_2_pre_s = models.IntegerField(min=min_l, max=max_l,
         label=label_custom
     )
-    ##### EDIT THIS 
     Question_2_post = models.IntegerField(min=min_l, max=max_l,
         label=label_custom
     )       
@@ -473,15 +468,15 @@ class Player(markets_models.Player):
     def set_profit(self):
         self.shares = self.settled_assets['A']
         old_asset_value = 0
-        self.contingent_trading_profit_G = self.settled_cash + self.shares*600
-        self.contingent_trading_profit_B = self.settled_cash + self.shares*400
+        self.contingent_trading_profit_G = self.settled_cash + self.shares*max_l
+        self.contingent_trading_profit_B = self.settled_cash + self.shares*min_l
 
         if self.world_state==1:
-            self.asset_value = self.shares*600
+            self.asset_value = self.shares*max_l
             self.profit = self.asset_value + self.settled_cash
              ## bad state
         else:
-            self.asset_value = self.shares*400
+            self.asset_value = self.shares*min_l
             self.profit =  self.asset_value + self.settled_cash
     #######################################################################
     ### sets the proft for an indivdual player 
