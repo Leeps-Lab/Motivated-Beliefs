@@ -37,7 +37,7 @@ class Pre_Trading_Survey_1(Page):
             else:
                 color = None
 
-            if self.player.te==2:
+            if self.player.treatment==2:
                 # for Intense 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
                 divident_range = "(between 0 and 1000)"
@@ -46,7 +46,7 @@ class Pre_Trading_Survey_1(Page):
                 'H if your IQ rank is higher than your paired player', 
                 'L if your IQ rank is lower than your paired player'
                 ]
-            elif self.player.te == 1: 
+            elif self.player.treatment== 1: 
                 # for Treatment 1 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
                 divident_range = "(between 400 and 600)"
@@ -105,7 +105,7 @@ class Pre_Trading_Survey_2(Page):
             else:
                 color = None
             
-            if self.player.te==2:
+            if self.player.treatment==2:
                 # for Intense 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
                 divident_range = "(between 0 and 1000)"
@@ -114,7 +114,7 @@ class Pre_Trading_Survey_2(Page):
                 'H if your IQ rank is higher than your paired player', 
                 'L if your IQ rank is lower than your paired player'
                 ]
-            elif self.player.te == 1: 
+            elif self.player.treatment== 1: 
                 # for Treatment 1 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
                 divident_range = "(between 400 and 600)"
@@ -171,7 +171,7 @@ class Market(BaseMarketPage):
         else:
             color = None
 
-        if self.player.te==2:
+        if self.player.treatment==2:
                 # for Intense 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
                 divident_range = "(between 0 and 1000)"
@@ -180,7 +180,7 @@ class Market(BaseMarketPage):
                 'H if your IQ rank is higher than your paired player', 
                 'L if your IQ rank is lower than your paired player'
                 ]
-        elif self.player.te == 1: 
+        elif self.player.treatment== 1: 
             # for Treatment 1 
             img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
             divident_range = "(between 400 and 600)"
@@ -241,7 +241,7 @@ class Post_Trading_Survey(BaseMarketPage):
             else:
                 color = None
 
-            if self.player.te==2:
+            if self.player.treatment==2:
                 # for Intense 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
                 divident_range = "(between 0 and 1000)"
@@ -250,7 +250,7 @@ class Post_Trading_Survey(BaseMarketPage):
                 'H if your IQ rank is higher than your paired player', 
                 'L if your IQ rank is lower than your paired player'
                 ]
-            elif self.player.te == 1: 
+            elif self.player.treatment== 1: 
                 # for Treatment 1 
                 img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
                 divident_range = "(between 400 and 600)"

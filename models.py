@@ -384,7 +384,7 @@ class Player(markets_models.Player):
     shares = models.IntegerField()
     hi = models.IntegerField()
     #color = models.IntegerField()
-    te = models.IntegerField(initial= globalTreat)
+    treatment = models.IntegerField(initial= globalTreat)
 ## Questions
     Question_1_pre_ns = models.StringField(
         label='''
