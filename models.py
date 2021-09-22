@@ -490,15 +490,26 @@ class Player(markets_models.Player):
         ###################question 1 post#####################################
         p_n_pre_ns = random.randint(0,99)
         n_asset_binomail_pre_ns = np.random.binomial(1, p_n_pre_ns/100)
-        n_asset_value_pre_ns = n_asset_binomail_pre_ns*200 +400
+        if globalTreat == 2: 
+            n_asset_value_pre_ns = n_asset_binomail_pre_ns*1000
+        else: 
+            n_asset_value_pre_ns = n_asset_binomail_pre_ns*200 +400
         #######################################################################
         p_n_pre_s = random.randint(0,99)
         n_asset_binomail_pre_s = np.random.binomial(1, p_n_pre_s/100)
-        n_asset_value_pre_s = n_asset_binomail_pre_s*200 +400
+        if globalTreat == 2: 
+            n_asset_value_pre_s = n_asset_binomail_pre_s*1000
+        else: 
+            n_asset_value_pre_s = n_asset_binomail_pre_s*200 +400
+        
         #######################################################################
         p_n_post = random.randint(0,99)
         n_asset_binomail_post = np.random.binomial(1, p_n_post/100)
-        n_asset_value_post = n_asset_binomail_post*200 +400
+        if globalTreat == 2: 
+            n_asset_value_post = n_asset_binomail_post*1000
+        else: 
+            n_asset_value_post = n_asset_binomail_post*200 +400
+        
          ################question 1 post#########################################
         try:
             self.Question_1_post_int = int(self.Question_1_post)
@@ -515,7 +526,9 @@ class Player(markets_models.Player):
         else:
             self.Question_1_payoff_post = n_asset_value_post
 
-        ################question 1 pre#########################################
+        ################ QUESTION 1  PRE  #########################################
+
+        # # # # ## # # # ## # #  Pre trading 1 # # # ## # ## # # # ## # # # # # 
         try:
             self.Question_1_pre_int_ns = int(self.Question_1_pre_ns)
         except ValueError: 
@@ -526,10 +539,20 @@ class Player(markets_models.Player):
         elif self.Question_1_pre_int_ns < 0:
             self.Question_1_payoff_pre_ns = 0
 
-        if self.Question_1_pre_int_ns>p_n_pre_ns:
-            self.Question_1_payoff_pre_ns = self.world_state*200 +400
-        else:
-            self.Question_1_payoff_pre_ns = n_asset_value_pre_ns
+        if globalTreat == 2: 
+            if self.Question_1_pre_int_ns>p_n_pre_ns:
+                self.Question_1_payoff_pre_ns = self.world_state*1000
+            else:
+                self.Question_1_payoff_pre_ns = n_asset_value_pre_ns
+        else: 
+            if self.Question_1_pre_int_ns>p_n_pre_ns:
+                self.Question_1_payoff_pre_ns = self.world_state*200 +400
+            else:
+                self.Question_1_payoff_pre_ns = n_asset_value_pre_ns
+        
+        # # ## # ## # # # # # # # end Pre trading 1 # # # # # # # # #  # # # # 
+
+        # # # # ## # # # ## # #  Pre trading 2 # # # ## # ## # # # ## # # # # # 
 
         try:
             self.Question_1_pre_int_s = int(self.Question_1_pre_s)
@@ -541,28 +564,66 @@ class Player(markets_models.Player):
         elif self.Question_1_pre_int_s < 0:
             self.Question_1_payoff_pre_s = 0
 
-        if self.Question_1_pre_int_s>p_n_pre_s:
-            self.Question_1_payoff_pre_s = self.world_state*200 +400
-        else:
-            self.Question_1_payoff_pre_s = n_asset_value_pre_s
-        ################### ### question 2 post###################################
-        p_n = random.randint(400,600)
-        if self.Question_2_post>p_n:
-            self.Question_2_payoff_post = self.world_state*200 +400
-        else:
-            self.Question_2_payoff_post = p_n
-        ################### ### question 2 pre###################################
-        p_n = random.randint(400,600)
-        if self.Question_2_pre_s>p_n:
-            self.Question_2_payoff_pre_s = self.world_state*200 +400
-        else:
-            self.Question_2_payoff_pre_s = p_n
+        if globalTreat == 2: 
+            if self.Question_1_pre_int_s>p_n_pre_s:
+                self.Question_1_payoff_pre_s = self.world_state*1000
+            else:
+                self.Question_1_payoff_pre_s = n_asset_value_pre_s
+        else: 
+            if self.Question_1_pre_int_s>p_n_pre_s:
+                self.Question_1_payoff_pre_s = self.world_state*200 +400
+            else:
+                self.Question_1_payoff_pre_s = n_asset_value_pre_s
 
-        p_n = random.randint(400,600)
-        if self.Question_2_pre_ns>p_n:
-            self.Question_2_payoff_pre_ns = self.world_state*200 +400
-        else:
-            self.Question_2_payoff_pre_ns = p_n
+        # # ## # ## # # # # # # # end Pre trading 1 # # # # # # # # #  # # # # 
+        
+        ################### ### question 2 post###################################
+        if globalTreat == 2: 
+
+            p_n = random.randint(0,1000)
+            if self.Question_2_post>p_n:
+                self.Question_2_payoff_post = self.world_state*1000
+            else:
+                self.Question_2_payoff_post = p_n
+        else: 
+            p_n = random.randint(400,600)
+            if self.Question_2_post>p_n:
+                self.Question_2_payoff_post = self.world_state*200 +400
+            else:
+                self.Question_2_payoff_post = p_n
+        
+        
+        ################### ### question 2 pre###################################
+        
+        # # # # ## # # # ## # #  Pre trading 1 # # # ## # ## # # # ## # # # # # 
+
+        if globalTreat == 2: 
+            p_n = random.randint(0,1000)
+            if self.Question_2_pre_s>p_n:
+                self.Question_2_payoff_pre_s = self.world_state*1000
+            else:
+                self.Question_2_payoff_pre_s = p_n
+        else: 
+            p_n = random.randint(400,600)
+            if self.Question_2_pre_s>p_n:
+                self.Question_2_payoff_pre_s = self.world_state*200 +400
+            else:
+                self.Question_2_payoff_pre_s = p_n
+
+        # # # # ## # # # ## # #  Pre trading 2 # # # ## # ## # # # ## # # # # # 
+        
+        if globalTreat == 2: 
+            p_n = random.randint(0, 1000)
+            if self.Question_2_pre_ns>p_n:
+                self.Question_2_payoff_pre_ns = self.world_state*1000
+            else:
+                self.Question_2_payoff_pre_ns = p_n
+        else: 
+            p_n = random.randint(400,600)
+            if self.Question_2_pre_ns>p_n:
+                self.Question_2_payoff_pre_ns = self.world_state*200 +400
+            else:
+                self.Question_2_payoff_pre_ns = p_n   
         ################### ### question 3 pre###################################
         ##C correct profit ranking
         C = self.pranking
