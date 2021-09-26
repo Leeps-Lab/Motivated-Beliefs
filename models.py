@@ -367,6 +367,7 @@ class Player(markets_models.Player):
     Question_1_pre_int_ns = models.IntegerField()
     Question_1_pre_int_s = models.IntegerField()
     Question_1_post_int = models.IntegerField()
+    Question_2_post_int = models.IntegerField()
     total_black_low = models.IntegerField()
     total_black_high = models.IntegerField()
     Question_1_payoff_pre_ns = models.IntegerField(initial=0)
@@ -399,13 +400,13 @@ class Player(markets_models.Player):
         Your answer:'''
     )  
     ##### Maybe:  Change field type 
-    Question_2_pre_ns = models.IntegerField(min=min_l, max=max_l,
+    Question_2_pre_ns = models.StringField(
         label=label_custom
     )
-    Question_2_pre_s = models.IntegerField(min=min_l, max=max_l,
+    Question_2_pre_s = models.StringField(
         label=label_custom
     )
-    Question_2_post = models.IntegerField(min=min_l, max=max_l,
+    Question_2_post = models.StringField(
         label=label_custom
     )       
     ###########################
@@ -510,23 +511,32 @@ class Player(markets_models.Player):
         else: 
             n_asset_value_post = n_asset_binomail_post*200 +400
         
-         ################question 1 post#########################################
+        ####################### QUESTION 1 #####################################
+
+        #########################    POST   ####################################
         try:
             self.Question_1_post_int = int(self.Question_1_post)
         except ValueError: 
             self.Question_1_post_int = -2
 
-        if self.Question_1_post_int > 100:
-            self.Question_1_payoff_post = 0
-        elif self.Question_1_post_int < 0:
-            self.Question_1_payoff_post = 0
-
-        elif self.Question_1_post_int>p_n_post:
-            self.Question_1_payoff_post = self.world_state*200 +400
-        else:
-            self.Question_1_payoff_post = n_asset_value_post
-
-        ################ QUESTION 1  PRE  #########################################
+        if globalTreat == 2: 
+            if self.Question_1_post_int > 100:
+                self.Question_1_payoff_post = 0
+            elif self.Question_1_post_int < 0:
+                self.Question_1_payoff_post = 0
+            elif self.Question_1_post_int>p_n_post:
+                self.Question_1_payoff_post = self.world_state*1000
+            else:
+                self.Question_1_payoff_post = n_asset_value_post
+        else: 
+            if self.Question_1_post_int > 100:
+                self.Question_1_payoff_post = 0
+            elif self.Question_1_post_int < 0:
+                self.Question_1_payoff_post = 0
+            elif self.Question_1_post_int>p_n_post:
+                self.Question_1_payoff_post = self.world_state*200 +400
+            else:
+                self.Question_1_payoff_post = n_asset_value_post
 
         # # # # ## # # # ## # #  Pre trading 1 # # # ## # ## # # # ## # # # # # 
         try:
@@ -534,96 +544,146 @@ class Player(markets_models.Player):
         except ValueError: 
             self.Question_1_pre_int_ns = -2
 
-        if self.Question_1_pre_int_ns > 100:
-            self.Question_1_payoff_pre_ns = 0
-        elif self.Question_1_pre_int_ns < 0:
-            self.Question_1_payoff_pre_ns = 0
-
-        if globalTreat == 2: 
-            if self.Question_1_pre_int_ns>p_n_pre_ns:
+        
+        if globalTreat == 2:
+            if self.Question_1_pre_int_ns > 100:
+                self.Question_1_payoff_pre_ns = 0
+            elif self.Question_1_pre_int_ns < 0:
+                self.Question_1_payoff_pre_ns = 0 
+            elif self.Question_1_pre_int_ns>p_n_pre_ns:
                 self.Question_1_payoff_pre_ns = self.world_state*1000
             else:
                 self.Question_1_payoff_pre_ns = n_asset_value_pre_ns
         else: 
-            if self.Question_1_pre_int_ns>p_n_pre_ns:
+            if self.Question_1_pre_int_ns > 100:
+                self.Question_1_payoff_pre_ns = 0
+            elif self.Question_1_pre_int_ns < 0:
+                self.Question_1_payoff_pre_ns = 0
+            elif self.Question_1_pre_int_ns>p_n_pre_ns:
                 self.Question_1_payoff_pre_ns = self.world_state*200 +400
             else:
                 self.Question_1_payoff_pre_ns = n_asset_value_pre_ns
-        
-        # # ## # ## # # # # # # # end Pre trading 1 # # # # # # # # #  # # # # 
 
         # # # # ## # # # ## # #  Pre trading 2 # # # ## # ## # # # ## # # # # # 
-
         try:
             self.Question_1_pre_int_s = int(self.Question_1_pre_s)
         except ValueError: 
             self.Question_1_pre_int_s = -2
 
-        if self.Question_1_pre_int_s > 100:
-            self.Question_1_payoff_pre_s = 0
-        elif self.Question_1_pre_int_s < 0:
-            self.Question_1_payoff_pre_s = 0
-
         if globalTreat == 2: 
-            if self.Question_1_pre_int_s>p_n_pre_s:
+            if self.Question_1_pre_int_s > 100:
+                self.Question_1_payoff_pre_s = 0
+            elif self.Question_1_pre_int_s < 0:
+                self.Question_1_payoff_pre_s = 0
+            elif self.Question_1_pre_int_s>p_n_pre_s:
                 self.Question_1_payoff_pre_s = self.world_state*1000
             else:
                 self.Question_1_payoff_pre_s = n_asset_value_pre_s
-        else: 
-            if self.Question_1_pre_int_s>p_n_pre_s:
+        else:
+            if self.Question_1_pre_int_s > 100:
+                self.Question_1_payoff_pre_s = 0
+            elif self.Question_1_pre_int_s < 0:
+                self.Question_1_payoff_pre_s = 0 
+            elif self.Question_1_pre_int_s>p_n_pre_s:
                 self.Question_1_payoff_pre_s = self.world_state*200 +400
             else:
                 self.Question_1_payoff_pre_s = n_asset_value_pre_s
 
-        # # ## # ## # # # # # # # end Pre trading 1 # # # # # # # # #  # # # # 
+        ####################### END QUESTION 1 #####################################
+
+
+        ####################### QUESTION 2 #####################################
         
-        ################### ### question 2 post###################################
+        #########################    POST   ####################################
+
+        try:
+            self.Question_2_post = int(self.Question_2_post)
+        except ValueError: 
+            self.Question_2_post = -2
+
         if globalTreat == 2: 
 
             p_n = random.randint(0,1000)
-            if self.Question_2_post>p_n:
+            if self.Question_2_post > 1000: 
+                self.Question_2_payoff_post = 0
+            elif self.Question_2_post < 0: 
+                self.Question_2_payoff_post = 0
+            elif self.Question_2_post>p_n:
                 self.Question_2_payoff_post = self.world_state*1000
             else:
                 self.Question_2_payoff_post = p_n
         else: 
             p_n = random.randint(400,600)
+            if self.Question_2_post > 600: 
+                self.Question_2_payoff_post = 0
+            elif self.Question_2_post < 400: 
+                self.Question_2_payoff_post = 0
             if self.Question_2_post>p_n:
                 self.Question_2_payoff_post = self.world_state*200 +400
             else:
                 self.Question_2_payoff_post = p_n
         
-        
-        ################### ### question 2 pre###################################
-        
         # # # # ## # # # ## # #  Pre trading 1 # # # ## # ## # # # ## # # # # # 
+
+        try:
+            self.Question_2_pre_s = int(self.Question_2_pre_s)
+        except ValueError: 
+            self.Question_2_pre_s = -2
 
         if globalTreat == 2: 
             p_n = random.randint(0,1000)
-            if self.Question_2_pre_s>p_n:
+            if self.Question_2_pre_s > 1000: 
+                self.Question_2_payoff_pre_s = 0
+            elif self.Question_2_pre_s < 0: 
+                self.Question_2_payoff_pre_s = 0
+            elif self.Question_2_pre_s>p_n:
                 self.Question_2_payoff_pre_s = self.world_state*1000
             else:
                 self.Question_2_payoff_pre_s = p_n
         else: 
             p_n = random.randint(400,600)
-            if self.Question_2_pre_s>p_n:
+            if self.Question_2_pre_s > 600: 
+                self.Question_2_payoff_pre_s = 0
+            elif self.Question_2_pre_s < 400: 
+                self.Question_2_payoff_pre_s = 0
+            elif self.Question_2_pre_s>p_n:
                 self.Question_2_payoff_pre_s = self.world_state*200 +400
             else:
                 self.Question_2_payoff_pre_s = p_n
 
         # # # # ## # # # ## # #  Pre trading 2 # # # ## # ## # # # ## # # # # # 
         
+        try: 
+            self.Question_2_pre_ns = int(self.Question_2_pre_ns)
+        except ValueError: 
+            self.Question_2_pre_ns = -2
+
+
         if globalTreat == 2: 
             p_n = random.randint(0, 1000)
-            if self.Question_2_pre_ns>p_n:
+            if self.Question_2_pre_ns > 1000: 
+                self.Question_2_payoff_pre_ns = 0
+            elif self.Question_2_pre_ns < 0: 
+                self.Question_2_payoff_pre_ns = 0
+            elif self.Question_2_pre_ns>p_n:
                 self.Question_2_payoff_pre_ns = self.world_state*1000
             else:
                 self.Question_2_payoff_pre_ns = p_n
         else: 
             p_n = random.randint(400,600)
+            if self.Question_2_pre_ns > 600: 
+                self.Question_2_payoff_pre_ns = 0
+            elif self.Question_2_pre_ns < 400: 
+                self.Question_2_payoff_pre_ns = 0
             if self.Question_2_pre_ns>p_n:
                 self.Question_2_payoff_pre_ns = self.world_state*200 +400
             else:
                 self.Question_2_payoff_pre_ns = p_n   
+
+        ####################### END QUESTION 2 #####################################
+
+        ####################### QUESTION 3 #####################################
+
         ################### ### question 3 pre###################################
         ##C correct profit ranking
         C = self.pranking
@@ -646,11 +706,11 @@ class Player(markets_models.Player):
             self.Question_1_payoff_pre_s = 0
         if self.Question_1_post=='-1':
             self.Question_1_payoff_post = 0
-        if self.Question_2_pre_ns==-1:
+        if self.Question_2_pre_ns=='-1':
             self.Question_2_payoff_pre_ns = 0
-        if self.Question_2_pre_s==-1:
+        if self.Question_2_pre_s=='-1':
             self.Question_2_payoff_pre_s = 0
-        if self.Question_2_post==-1:
+        if self.Question_2_post=='-1':
             self.Question_2_payoff_post = 0
         if self.Question_3_pre_ns==-1:
             self.Question_3_payoff_pre_ns= 0

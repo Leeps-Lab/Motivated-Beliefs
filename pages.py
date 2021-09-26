@@ -16,8 +16,8 @@ class Pre_Trading_Survey_1(Page):
         if self.timeout_happened:
             if self.player.Question_1_pre_ns == '':
                 self.player.Question_1_pre_ns = '-1'
-            if self.player.Question_2_pre_ns == 0:
-                self.player.Question_2_pre_ns = -1
+            if self.player.Question_2_pre_ns == '':
+                self.player.Question_2_pre_ns = '-1'
             if self.player.Question_3_pre_ns == 0:
                 self.player.Question_3_pre_ns = -1
             self.player.save()
@@ -85,8 +85,8 @@ class Pre_Trading_Survey_2(Page):
         if self.timeout_happened:
             if self.player.Question_1_pre_s == '':
                 self.player.Question_1_pre_s = '-1'
-            if self.player.Question_2_pre_s == 0:
-                self.player.Question_2_pre_s = -1
+            if self.player.Question_2_pre_s == '':
+                self.player.Question_2_pre_s = '-1'
             if self.player.Question_3_pre_s == 0:
                 self.player.Question_3_pre_s = -1
             self.player.save()
@@ -219,8 +219,8 @@ class Post_Trading_Survey(BaseMarketPage):
         if self.timeout_happened:
             if self.player.Question_1_post == '':
                 self.player.Question_1_post = '-1'
-            if self.player.Question_2_post == 0:
-                self.player.Question_2_post= -1
+            if self.player.Question_2_post == '':
+                self.player.Question_2_post= '-1'
             if self.player.Question_3_post == 0:
                 self.player.Question_3_post = -1
             self.player.save()
