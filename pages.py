@@ -291,6 +291,14 @@ class Results_trading(Page):
     def get_timeout_seconds(self):
         return 15
     def vars_for_template(self): 
+        if self.player.treatment==2:
+                # for Intense 
+            min_l = 400
+            max_l = 600
+        else: 
+            min_l = 0
+            max_l = 1000
+
         return{
             'shares': self.player.shares,
 #            'profit': self.player.profit,
@@ -299,6 +307,8 @@ class Results_trading(Page):
 #            'payoff_from_trading': self.player.payoff_from_trading,
             'contingent_trading_profit_G': self.player.contingent_trading_profit_G,
             'contingent_trading_profit_B': self.player.contingent_trading_profit_B,
+            'min_l' : min_l,
+            'max_l' : max_l, 
         }
 class Results_survey(Page):
     def get_timeout_seconds(self):
@@ -344,7 +354,13 @@ class Results_sum(Page):
             state="G"
         elif self.player.world_state==0:
             state="B"
-
+        if self.player.treatment==2:
+                # for Intense 
+            min_l = 400
+            max_l = 600
+        else: 
+            min_l = 0
+            max_l = 1000
         return {
             'Question_1_pay_post': self.player.Question_1_payoff_post,
             'Question_2_pay_post': self.player.Question_2_payoff_post,
@@ -366,6 +382,8 @@ class Results_sum(Page):
             'contingent_trading_profit_B': self.player.contingent_trading_profit_B,
             'contingent_total_payoff_G': self.player.contingent_total_payoff_G,
             'contingent_total_payoff_B': self.player.contingent_total_payoff_B,
+            'min_l' : min_l,
+            'max_l' : max_l, 
         }
 
 
