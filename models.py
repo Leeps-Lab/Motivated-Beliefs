@@ -367,6 +367,8 @@ class Player(markets_models.Player):
     Question_1_pre_int_ns = models.IntegerField()
     Question_1_pre_int_s = models.IntegerField()
     Question_1_post_int = models.IntegerField()
+    Question_2_pre_int_ns = models.IntegerField()
+    Question_2_pre_int_s = models.IntegerField()
     Question_2_post_int = models.IntegerField()
     total_black_low = models.IntegerField()
     total_black_high = models.IntegerField()
@@ -597,28 +599,28 @@ class Player(markets_models.Player):
         #########################    POST   ####################################
 
         try:
-            self.Question_2_post = int(self.Question_2_post)
+            self.Question_2_post_int = int(self.Question_2_post)
         except ValueError: 
-            self.Question_2_post = -2
+            self.Question_2_post_int = -2
 
         if globalTreat == 2: 
 
             p_n = random.randint(0,1000)
-            if self.Question_2_post > 1000: 
+            if self.Question_2_post_int > 1000: 
                 self.Question_2_payoff_post = 0
-            elif self.Question_2_post < 0: 
+            elif self.Question_2_post_int < 0: 
                 self.Question_2_payoff_post = 0
-            elif self.Question_2_post>p_n:
+            elif self.Question_2_post_int>p_n:
                 self.Question_2_payoff_post = self.world_state*1000
             else:
                 self.Question_2_payoff_post = p_n
         else: 
             p_n = random.randint(400,600)
-            if self.Question_2_post > 600: 
+            if self.Question_2_post_int > 600: 
                 self.Question_2_payoff_post = 0
-            elif self.Question_2_post < 400: 
+            elif self.Question_2_post_int < 400: 
                 self.Question_2_payoff_post = 0
-            if self.Question_2_post>p_n:
+            elif self.Question_2_post_int>p_n:
                 self.Question_2_payoff_post = self.world_state*200 +400
             else:
                 self.Question_2_payoff_post = p_n
@@ -626,27 +628,27 @@ class Player(markets_models.Player):
         # # # # ## # # # ## # #  Pre trading 1 # # # ## # ## # # # ## # # # # # 
 
         try:
-            self.Question_2_pre_s = int(self.Question_2_pre_s)
+            self.Question_2_pre_int_s = int(self.Question_2_pre_s)
         except ValueError: 
-            self.Question_2_pre_s = -2
+            self.Question_2_pre_int_s = -2
 
         if globalTreat == 2: 
             p_n = random.randint(0,1000)
-            if self.Question_2_pre_s > 1000: 
+            if self.Question_2_pre_int_s > 1000: 
                 self.Question_2_payoff_pre_s = 0
-            elif self.Question_2_pre_s < 0: 
+            elif self.Question_2_pre_int_s < 0: 
                 self.Question_2_payoff_pre_s = 0
-            elif self.Question_2_pre_s>p_n:
+            elif self.Question_2_pre_int_s>p_n:
                 self.Question_2_payoff_pre_s = self.world_state*1000
             else:
                 self.Question_2_payoff_pre_s = p_n
         else: 
             p_n = random.randint(400,600)
-            if self.Question_2_pre_s > 600: 
+            if self.Question_2_pre_int_s > 600: 
                 self.Question_2_payoff_pre_s = 0
-            elif self.Question_2_pre_s < 400: 
+            elif self.Question_2_pre_int_s < 400: 
                 self.Question_2_payoff_pre_s = 0
-            elif self.Question_2_pre_s>p_n:
+            elif self.Question_2_pre_int_s>p_n:
                 self.Question_2_payoff_pre_s = self.world_state*200 +400
             else:
                 self.Question_2_payoff_pre_s = p_n
@@ -654,28 +656,28 @@ class Player(markets_models.Player):
         # # # # ## # # # ## # #  Pre trading 2 # # # ## # ## # # # ## # # # # # 
         
         try: 
-            self.Question_2_pre_ns = int(self.Question_2_pre_ns)
+            self.Question_2_pre_int_ns = int(self.Question_2_pre_ns)
         except ValueError: 
-            self.Question_2_pre_ns = -2
+            self.Question_2_pre_int_ns = -2
 
 
         if globalTreat == 2: 
             p_n = random.randint(0, 1000)
-            if self.Question_2_pre_ns > 1000: 
+            if self.Question_2_pre_int_ns > 1000: 
                 self.Question_2_payoff_pre_ns = 0
-            elif self.Question_2_pre_ns < 0: 
+            elif self.Question_2_pre_int_ns < 0: 
                 self.Question_2_payoff_pre_ns = 0
-            elif self.Question_2_pre_ns>p_n:
+            elif self.Question_2_pre_int_ns>p_n:
                 self.Question_2_payoff_pre_ns = self.world_state*1000
             else:
                 self.Question_2_payoff_pre_ns = p_n
         else: 
             p_n = random.randint(400,600)
-            if self.Question_2_pre_ns > 600: 
+            if self.Question_2_pre_int_ns > 600: 
                 self.Question_2_payoff_pre_ns = 0
-            elif self.Question_2_pre_ns < 400: 
+            elif self.Question_2_pre_int_ns < 400: 
                 self.Question_2_payoff_pre_ns = 0
-            if self.Question_2_pre_ns>p_n:
+            elif self.Question_2_pre_int_ns>p_n:
                 self.Question_2_payoff_pre_ns = self.world_state*200 +400
             else:
                 self.Question_2_payoff_pre_ns = p_n   

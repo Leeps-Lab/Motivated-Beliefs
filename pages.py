@@ -107,7 +107,7 @@ class Pre_Trading_Survey_2(Page):
             
             if self.player.treatment==2:
                 # for Intense 
-                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
+                img_sig_url = '/static/Motivated_Beliefs/signal_i.PNG'
                 divident_range = "(between 0 and 1000)"
                 group_assignment = [
                 'The Computer assigned you into group', 
@@ -116,7 +116,7 @@ class Pre_Trading_Survey_2(Page):
                 ]
             elif self.player.treatment== 1: 
                 # for Treatment 1 
-                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
                 divident_range = "(between 400 and 600)"
                 group_assignment = [
                 'The Computer assigned you into group', 
@@ -125,7 +125,7 @@ class Pre_Trading_Survey_2(Page):
                 ]
             else: 
                 # for control 0 
-                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
                 divident_range = "(between 400 and 600)"
                 group_assignment = [
                 'The Computer assigned you into group',
@@ -173,7 +173,7 @@ class Market(BaseMarketPage):
 
         if self.player.treatment==2:
                 # for Intense 
-                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
+                img_sig_url = '/static/Motivated_Beliefs/signal_i.PNG'
                 divident_range = "(between 0 and 1000)"
                 group_assignment = [
                 'The Computer assigned you into group', 
@@ -182,7 +182,7 @@ class Market(BaseMarketPage):
                 ]
         elif self.player.treatment== 1: 
             # for Treatment 1 
-            img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+            img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
             divident_range = "(between 400 and 600)"
             group_assignment = [
             'The Computer assigned you into group', 
@@ -191,7 +191,7 @@ class Market(BaseMarketPage):
             ]
         else: 
             # for control 0 
-            img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+            img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
             divident_range = "(between 400 and 600)"
             group_assignment = [
             'The Computer assigned you into group',
@@ -243,7 +243,7 @@ class Post_Trading_Survey(BaseMarketPage):
 
             if self.player.treatment==2:
                 # for Intense 
-                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1_i.PNG'
+                img_sig_url = '/static/Motivated_Beliefs/signal_i.PNG'
                 divident_range = "(between 0 and 1000)"
                 group_assignment = [
                 'The Computer assigned you into group', 
@@ -252,7 +252,7 @@ class Post_Trading_Survey(BaseMarketPage):
                 ]
             elif self.player.treatment== 1: 
                 # for Treatment 1 
-                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
                 divident_range = "(between 400 and 600)"
                 group_assignment = [
                 'The Computer assigned you into group', 
@@ -261,7 +261,7 @@ class Post_Trading_Survey(BaseMarketPage):
                 ]
             else: 
                 # for control 0 
-                img_sig_url = '/static/Motivated_Beliefs/signal_pre_trading_1.PNG'
+                img_sig_url = '/static/Motivated_Beliefs/signal.PNG'
                 divident_range = "(between 400 and 600)"
                 group_assignment = [
                 'The Computer assigned you into group',
