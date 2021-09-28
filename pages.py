@@ -293,11 +293,11 @@ class Results_trading(Page):
     def vars_for_template(self): 
         if self.player.treatment==2:
                 # for Intense 
-            min_l = 400
-            max_l = 600
-        else: 
             min_l = 0
             max_l = 1000
+        else: 
+            min_l = 400
+            max_l = 600
 
         return{
             'shares': self.player.shares,
@@ -356,11 +356,11 @@ class Results_sum(Page):
             state="B"
         if self.player.treatment==2:
                 # for Intense 
-            min_l = 400
-            max_l = 600
-        else: 
             min_l = 0
             max_l = 1000
+        else: 
+            min_l = 400
+            max_l = 600
         return {
             'Question_1_pay_post': self.player.Question_1_payoff_post,
             'Question_2_pay_post': self.player.Question_2_payoff_post,
