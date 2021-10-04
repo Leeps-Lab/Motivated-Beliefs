@@ -493,14 +493,14 @@ class Player(markets_models.Player):
         ###################question 1 post#####################################
         p_n_pre_ns = random.randint(0,99)
         n_asset_binomail_pre_ns = np.random.binomial(1, p_n_pre_ns/100)
-        if globalTreat == 2: 
+        if globalTreat == '2': 
             n_asset_value_pre_ns = n_asset_binomail_pre_ns*1000
         else: 
             n_asset_value_pre_ns = n_asset_binomail_pre_ns*200 +400
         #######################################################################
         p_n_pre_s = random.randint(0,99)
         n_asset_binomail_pre_s = np.random.binomial(1, p_n_pre_s/100)
-        if globalTreat == 2: 
+        if globalTreat == '2': 
             n_asset_value_pre_s = n_asset_binomail_pre_s*1000
         else: 
             n_asset_value_pre_s = n_asset_binomail_pre_s*200 +400
@@ -508,7 +508,7 @@ class Player(markets_models.Player):
         #######################################################################
         p_n_post = random.randint(0,99)
         n_asset_binomail_post = np.random.binomial(1, p_n_post/100)
-        if globalTreat == 2: 
+        if globalTreat == '2': 
             n_asset_value_post = n_asset_binomail_post*1000
         else: 
             n_asset_value_post = n_asset_binomail_post*200 +400
@@ -521,7 +521,7 @@ class Player(markets_models.Player):
         except ValueError: 
             self.Question_1_post_int = -2
 
-        if globalTreat == 2: 
+        if globalTreat == '2': 
             if self.Question_1_post_int > 100:
                 self.Question_1_payoff_post = 0
             elif self.Question_1_post_int < 0:
@@ -547,7 +547,7 @@ class Player(markets_models.Player):
             self.Question_1_pre_int_ns = -2
 
         
-        if globalTreat == 2:
+        if globalTreat == '2':
             if self.Question_1_pre_int_ns > 100:
                 self.Question_1_payoff_pre_ns = 0
             elif self.Question_1_pre_int_ns < 0:
@@ -572,7 +572,7 @@ class Player(markets_models.Player):
         except ValueError: 
             self.Question_1_pre_int_s = -2
 
-        if globalTreat == 2: 
+        if globalTreat == '2': 
             if self.Question_1_pre_int_s > 100:
                 self.Question_1_payoff_pre_s = 0
             elif self.Question_1_pre_int_s < 0:
@@ -603,7 +603,7 @@ class Player(markets_models.Player):
         except ValueError: 
             self.Question_2_post_int = -2
 
-        if globalTreat == 2: 
+        if globalTreat == '2': 
 
             p_n = random.randint(0,1000)
             if self.Question_2_post_int > 1000: 
@@ -632,7 +632,7 @@ class Player(markets_models.Player):
         except ValueError: 
             self.Question_2_pre_int_s = -2
 
-        if globalTreat == 2: 
+        if globalTreat == '2': 
             p_n = random.randint(0,1000)
             if self.Question_2_pre_int_s > 1000: 
                 self.Question_2_payoff_pre_s = 0
@@ -661,7 +661,7 @@ class Player(markets_models.Player):
             self.Question_2_pre_int_ns = -2
 
 
-        if globalTreat == 2: 
+        if globalTreat == '2': 
             p_n = random.randint(0, 1000)
             if self.Question_2_pre_int_ns > 1000: 
                 self.Question_2_payoff_pre_ns = 0
