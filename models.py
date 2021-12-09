@@ -124,7 +124,7 @@ class Subsession(markets_models.Subsession):
             for p in self.get_players():
                 i=p.iqranking-1
                 p.signal1_black = player_bb[i]
-                p.signal1_white = 1-p.signal1_black
+                p.signal1_white = 2-p.signal1_black
     #######################################################################
     ### sets the pairs for player and color
     ### treat, player
